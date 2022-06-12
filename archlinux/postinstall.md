@@ -83,12 +83,18 @@ sudo pacman -S --needed lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-
 sudo pacman -S --needed nvidia-lts nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader
 ```
 
-#### Optimus Manager
+### Optimus Manager
 
 Leitura recomendada: [Guia Optimus Manager][optimusmanager]
 
 ```bash
 yay -S optimus-manager
+```
+
+Arquivo de configuração
+
+```bash
+sudo cp /usr/share/optimus-manager.conf /etc/optimus-manager/optimus-manager.conf
 ```
 
 ##### Gnome
