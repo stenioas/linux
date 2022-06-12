@@ -61,7 +61,7 @@ yay -S google-chrome spotify visual-studio-code-bin papirus-folders-git
 
 > **INFO:** Adiciona suporte a vulkan e 32 bits.
 
-Recomendo que leia o [Guia Lutris][lutrisinstallingdrivers]
+Leitura recomendada: [Guia Lutris][lutrisinstallingdrivers]
 
 ### Intel
 
