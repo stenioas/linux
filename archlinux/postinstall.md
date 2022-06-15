@@ -160,7 +160,7 @@ sudo pacman -S --needed wine-staging wine-mono giflib lib32-giflib libpng lib32-
 > **INFO:** Resolve erro de inicialização do jogo.
 
 ```bash
-sudo sysctl -w 'abi.vsyscall32=0' && sudo echo '# League of Legends\nabi.vsyscall32=0' > /etc/sysctl.d/lol.conf
+sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.vsyscall32=0" > /etc/sysctl.d/99-lol.conf'
 ```
 
 <br/>
