@@ -1,25 +1,17 @@
 # Guia de pós-instalação Pop!\_Os 22.04 LTS
 
-<br/>
+## 1. Atualizar o sistema
 
-## 1. Habilitar arquitetura 32 bits
+> **INFO:** Habilita arquitetura 32 bits
 
 ```bash
-sudo dpkg --add-architecture i386
+sudo dpkg --add-architecture i386 && sudo apt update && sudo apt upgrade
 ```
 
-<br/>
-
-## 2. Atualizar o sistema
+## 2. Intalar pacotes e softwares
 
 ```bash
-sudo apt update && sudo apt upgrade
-```
-
-## 3. Softwares
-
-```bash
-sudo apt install vlc gimp inkscape lutris papirus-icon-theme gnome-tweaks dconf-editor
+sudo apt install vlc gimp inkscape lutris papirus-icon-theme gnome-tweaks dconf-editor htop gparted neofetch simplescreenrecorder transmission-gtk qt5ct qt5-style-kvantum-themes
 ```
 
 ### Google Chrome
@@ -34,15 +26,15 @@ sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable
 curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - && echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt update && sudo apt install spotify-client
 ```
 
-<br/>
-
 ## 4. Terminal
 
 ```bash
 sudo apt install zsh
 ```
 
-### Oh My Zsh [[Repo][ohmyzsh]]
+### Oh My Zsh [[Repo oficial]][ohmyzsh]
+
+#### Instalação
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh; zsh
@@ -66,7 +58,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 ```
 
-Adicionar o bloco abaixo ao arquivo `~/.zshrc` na seção plugins
+#### Adicionar o bloco abaixo ao arquivo `~/.zshrc` na seção plugins
 
 ```bash
 plugins=(
@@ -82,19 +74,19 @@ plugins=(
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 ```
 
-### Starship prompt - [[Guia Starship][starship]]
+### Starship prompt [[Guia Starship]][starship]
+
+#### Instalação
 
 ```bash
 curl -sS https://starship.rs/install.sh | sh
 ```
 
-Adicionar a linha abaixo ao arquivo `~/.zshrc`
+#### Adicionar a linha abaixo ao arquivo `~/.zshrc`
 
 ```bash
 eval "$(starship init zsh)"
 ```
-
-<br/>
 
 ## 5. Ambiente de Desenvolvimento
 
@@ -102,47 +94,47 @@ eval "$(starship init zsh)"
 sudo apt install code
 ```
 
-### asdf-vm - [[Guia asdf][asdfvm]]
+### asdf-vm [[Guia asdf]][asdfvm]
+
+#### Instalação
 
 ```bash
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
 ```
 
-Adicionar a linha abaixo ao arquivo `~/.zshrc`
+#### Adicionar a linha abaixo ao arquivo `~/.zshrc`
 
 ```bash
 . $HOME/.asdf/asdf.sh
 ```
 
-Recarregar as configurações do zsh
+#### Recarregar as configurações do zsh
 
 ```bash
 source ~/.zshrc
 ```
 
-Adicionando plugin Nodejs
+#### Adicionando plugin Nodejs
 
 ```bash
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 ```
 
-Adicionando plugin Java
+#### Adicionando plugin Java
 
 ```bash
 asdf plugin add java https://github.com/halcyon/asdf-java.git
 ```
 
-Adicionando plugin Maven
+#### Adicionando plugin Maven
 
 ```bash
 asdf plugin add maven https://github.com/halcyon/asdf-maven.git
 ```
 
-<br/>
-
 ## Jogos
 
-### Wine - [Guia Lutris][lutriswinedependencies]
+### Wine [[Guia Lutris]][lutriswinedependencies]
 
 ```bash
 sudo apt install -y wine64 wine32 libasound2-plugins:i386 libsdl2-2.0-0:i386 libdbus-1-3:i386 libsqlite3-0:i386
@@ -156,43 +148,29 @@ sudo apt install -y wine64 wine32 libasound2-plugins:i386 libsdl2-2.0-0:i386 lib
 sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.vsyscall32=0" > /etc/sysctl.d/99-lol.conf'
 ```
 
-<br/>
-
 ## Extras (Opcional)
 
-### Temas
+### Adwaita para Aplicativos legado [[Repo oficial]][adwgtk3]
 
-#### Adwaita para Aplicativos legado
-
-[Repo][adwgtk3]
-
-#### Fluent-gkt-theme
-
-[Repo][fluentgtktheme]
+### Fluent-gkt-theme [[Repo oficial]][fluentgtktheme]
 
 ```bash
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git && cd Fluent-gtk-theme && sudo ./install.sh -i arch --tweaks round solid
 ```
 
-#### Papirus Folders
-
-> Veja no repo como utilizar
-
-[Repo][papirusfolders]
+### Papirus Folders [[Repo oficial]][papirusfolders]
 
 ```bash
 wget -qO- https://git.io/papirus-folders-install | sh
 ```
 
-Definir o tema Yaru para os ícones
+#### Definir o tema Yaru para os ícones
 
 ```bash
 papirus-folders -C yaru --theme Papirus-Dark
 ```
 
-#### McMojave-cursors
-
-[Repo][mcmojavecursors]
+### McMojave-cursors [[Repo oficial]][mcmojavecursors]
 
 ```bash
 git clone https://github.com/vinceliuice/McMojave-cursors.git && cd McMojave-cursors && sudo ./install.sh
