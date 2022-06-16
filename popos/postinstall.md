@@ -1,5 +1,16 @@
 # Guia de pós-instalação Pop!\_Os 22.04 LTS
 
+## Índice
+
+- [Atualizar o sistema](#1-atualizar-o-sistema)
+- [Instalar pacotes e aplicações](#2-instalar-pacotes-e-aplicações)
+- [Terminal](#3-terminal)
+- [Ambiente de Desenvolvimento](#4-ambiente-de-desenvolvimento)
+- [Jogos](#5-jogos)
+- [Extras (Opcional)](#6-extras-opcional)
+
+<br/>
+
 ## 1. Atualizar o sistema
 
 > **INFO:** Habilita arquitetura 32 bits
@@ -8,25 +19,33 @@
 sudo dpkg --add-architecture i386 && sudo apt update && sudo apt upgrade
 ```
 
-## 2. Intalar pacotes e softwares
+<br/>
+
+## 2. Instalar pacotes e aplicações
 
 ```bash
 sudo apt install vlc gimp inkscape lutris papirus-icon-theme gnome-tweaks dconf-editor htop gparted neofetch simplescreenrecorder transmission-gtk qt5ct qt5-style-kvantum-themes
 ```
 
-### Google Chrome
+<details><summary>&nbsp;Google Chrome</summary>
 
 ```bash
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && sudo wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add - && sudo apt update && sudo apt install google-chrome-stable
 ```
 
-### Spotify
+</details>
+
+<details><summary>Spotify</summary>
 
 ```bash
 curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - && echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt update && sudo apt install spotify-client
 ```
 
-## 4. Terminal
+</details>
+
+<br/>
+
+## 3. Terminal
 
 ```bash
 sudo apt install zsh
@@ -88,7 +107,9 @@ curl -sS https://starship.rs/install.sh | sh
 eval "$(starship init zsh)"
 ```
 
-## 5. Ambiente de Desenvolvimento
+<br/>
+
+## 4. Ambiente de Desenvolvimento
 
 ```bash
 sudo apt install code
@@ -132,7 +153,9 @@ asdf plugin add java https://github.com/halcyon/asdf-java.git
 asdf plugin add maven https://github.com/halcyon/asdf-maven.git
 ```
 
-## Jogos
+<br/>
+
+## 5. Jogos
 
 ### Wine [[Guia Lutris]][lutriswinedependencies]
 
@@ -148,7 +171,9 @@ sudo apt install -y wine64 wine32 libasound2-plugins:i386 libsdl2-2.0-0:i386 lib
 sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.vsyscall32=0" > /etc/sysctl.d/99-lol.conf'
 ```
 
-## Extras (Opcional)
+<br/>
+
+## 6. Extras (Opcional)
 
 ### Adwaita para Aplicativos legado [[Repo oficial]][adwgtk3]
 
