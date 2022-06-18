@@ -4,19 +4,51 @@ O guia foi feito em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidi
 
 ## Índice
 
-- Gráficos híbridos
-- Restaurar backup
-- SSH keys
-- Terminal
-- Apps
-- Coding
-- Games
-- Extras
-- Configurações automáticas
+- [Guia de pós-instalação Pop!\_Os 22.04 LTS](#guia-de-pós-instalação-pop_os-2204-lts)
+  - [Índice](#índice)
+  - [1. Iniciando](#1-iniciando)
+    - [Alterando o hostname](#alterando-o-hostname)
+    - [Habilitando arquitetura 32 bits](#habilitando-arquitetura-32-bits)
+    - [Alternando perfil gráfico](#alternando-perfil-gráfico)
+      - [HÍbrido](#híbrido)
+      - [Nvidia](#nvidia)
+  - [2. Instalando pacotes](#2-instalando-pacotes)
+    - [Codecs multimídia](#codecs-multimídia)
+    - [Integração de aplicações Qt](#integração-de-aplicações-qt)
+    - [Apps](#apps)
+    - [Google Chrome](#google-chrome)
+    - [Spotify](#spotify)
+  - [3. Restaurando backup](#3-restaurando-backup)
+  - [4. Terminal](#4-terminal)
+    - [Zsh](#zsh)
+    - [Oh My Zsh](#oh-my-zsh)
+      - [Alterando o shell padrão](#alterando-o-shell-padrão)
+    - [zsh-syntax-highlighting | zsh-autosuggestions](#zsh-syntax-highlighting--zsh-autosuggestions)
+    - [fzf](#fzf)
+    - [Starship prompt](#starship-prompt)
+  - [5. Ambiente de Desenvolvimento](#5-ambiente-de-desenvolvimento)
+    - [Apps](#apps-1)
+    - [asdf-vm](#asdf-vm)
+    - [Docker](#docker)
+  - [6. Restaurando chaves SSH](#6-restaurando-chaves-ssh)
+  - [7. Jogos](#7-jogos)
+    - [Dependências Wine](#dependências-wine)
+    - [Apps](#apps-2)
+    - [Dicas](#dicas)
+      - [League of Legends](#league-of-legends)
+  - [8. Extras](#8-extras)
+    - [Fluent-gkt-theme](#fluent-gkt-theme)
+      - [Instalando](#instalando)
+    - [Papirus Icon Theme](#papirus-icon-theme)
+    - [Papirus Folders](#papirus-folders)
+      - [Instalando](#instalando-1)
+      - [Definindo tema](#definindo-tema)
+    - [McMojave-cursors](#mcmojave-cursors)
+      - [Instalando](#instalando-2)
 
 <br/>
 
-## 1. Configurações iniciais
+## 1. Iniciando
 
 ### Alterando o hostname
 
@@ -32,17 +64,23 @@ hostnamectl set-hostname steniopc
 sudo dpkg --add-architecture i386 && sudo apt update && sudo apt upgrade
 ```
 
-### Habilitando perfil gráfico híbrido
+### Alternando perfil gráfico
 
-**INFO:** O comando abaixo também reinicia o sistema
+#### HÍbrido
 
 ```bash
 sudo system76-power graphics hybrid && sudo reboot now
 ```
 
-## 2. Pacotes
+#### Nvidia
 
-### Codec's multimídia
+```bash
+sudo system76-power graphics nvidia && sudo reboot now
+```
+
+## 2. Instalando pacotes
+
+### Codecs multimídia
 
 ```bash
 sudo apt install -y lame libavcodec-extra ffmpeg
@@ -54,10 +92,10 @@ sudo apt install -y lame libavcodec-extra ffmpeg
 sudo apt install -y qt5ct qt5-style-kvantum qt5-style-kvantum-l10n qt5-style-kvantum-themes
 ```
 
-### Aplicações
+### Apps
 
 ```bash
-sudo apt install -y vlc gimp inkscape papirus-icon-theme gnome-tweaks dconf-editor htop gparted neofetch simplescreenrecorder transmission-gtk caffeine
+sudo apt install -y vlc gimp inkscape gnome-tweaks dconf-editor htop gparted neofetch simplescreenrecorder transmission-gtk caffeine
 ```
 
 ### Google Chrome
@@ -72,11 +110,13 @@ sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable
 curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - && echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt update && sudo apt install -y spotify-client
 ```
 
-## 3. Terminal
+## 3. Restaurando backup
 
-### zsh
+> **EM BREVE**
 
-#### Instalando
+## 4. Terminal
+
+### Zsh
 
 ```bash
 sudo apt install -y zsh
@@ -85,8 +125,6 @@ sudo apt install -y zsh
 ### Oh My Zsh
 
 > **INFO:** _Conheça o repositório oficial [aqui][ohmyzsh]_
-
-#### Instalando
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh; zsh
@@ -99,8 +137,6 @@ sudo usermod --shell $(which zsh) $USER
 ```
 
 ### zsh-syntax-highlighting | zsh-autosuggestions
-
-#### Instalando
 
 ```bash
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
@@ -122,8 +158,6 @@ plugins=(
 
 > **INFO:** _Conheça o repositório oficial [aqui][fzf]_
 
-#### Instalando
-
 Selecione "y" para todas as perguntas
 
 ```bash
@@ -133,8 +167,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 ### Starship prompt
 
 > **INFO:** _Conheça o site oficial [aqui][starship]_
-
-#### Instalando
 
 ```bash
 curl -sS https://starship.rs/install.sh | sh
@@ -146,9 +178,9 @@ Adicione a linha abaixo ao arquivo `~/.zshrc`
 eval "$(starship init zsh)"
 ```
 
-## 4. Ambiente de Desenvolvimento
+## 5. Ambiente de Desenvolvimento
 
-### Aplicações
+### Apps
 
 ```bash
 sudo apt install -y code
@@ -157,8 +189,6 @@ sudo apt install -y code
 ### asdf-vm
 
 > **INFO:** _Conheça o site oficial [aqui][asdfvm]_
-
-#### Instalando
 
 ```bash
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
@@ -170,33 +200,35 @@ Adicione a linha abaixo ao arquivo `~/.zshrc`
 . $HOME/.asdf/asdf.sh
 ```
 
-#### Recarregando configurações do zsh
+Recarregue as configurações do zsh
 
 ```bash
 source ~/.zshrc
 ```
 
-#### Adicionando plugin Nodejs
+Exemplo adicionando plugin Nodejs:
 
 ```bash
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 ```
 
-#### Adicionando plugin Java
+Exemplo instalando versão lts do Nodejs:
 
 ```bash
-asdf plugin add java https://github.com/halcyon/asdf-java.git
+asdf install nodejs lts
 ```
 
-#### Adicionando plugin Maven
+### Docker
 
-```bash
-asdf plugin add maven https://github.com/halcyon/asdf-maven.git
-```
+> **EM BREVE**
 
-## 5. Jogos
+## 6. Restaurando chaves SSH
 
-> **INFO:** _A arquitetura de 32 bits precisa estar habilitada_
+> **EM BREVE**
+
+## 7. Jogos
+
+> **ALERTA!** _A arquitetura de 32 bits precisa estar habilitada_
 
 ### Dependências Wine
 
@@ -206,13 +238,15 @@ asdf plugin add maven https://github.com/halcyon/asdf-maven.git
 sudo apt install -y wine64 wine32 libasound2-plugins:i386 libsdl2-2.0-0:i386 libdbus-1-3:i386 libsqlite3-0:i386
 ```
 
-### Aplicações
+### Apps
 
 ```bash
 sudo apt install -y lutris steam-installer
 ```
 
-### League of Legends
+### Dicas
+
+#### League of Legends
 
 > **INFO:** _Resolve erro de inicialização do jogo_
 
@@ -220,11 +254,13 @@ sudo apt install -y lutris steam-installer
 sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.vsyscall32=0" > /etc/sysctl.d/99-lol.conf'
 ```
 
-## 6. Extras (Opcional)
+Problemas com gráficos Nvidia
 
-### Adwaita para Aplicativos legado
+> **DICA:** Caso tenha problemas de tela preta na tela de carregamento das partidas, experimente habilitar a seguinte opção nas configurações do cliente:
+>
+> **Jogo > Gráficos > Optar pelo modo legado DX9**
 
-> **INFO:** _Baixe o release do repositório oficial [aqui][adwgtk3]_
+## 8. Extras
 
 ### Fluent-gkt-theme
 
@@ -234,6 +270,12 @@ sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.
 
 ```bash
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git && cd Fluent-gtk-theme && sudo ./install.sh -i popos --tweaks round solid
+```
+
+### Papirus Icon Theme
+
+```bash
+sudo apt install -y papirus-icon-theme
 ```
 
 ### Papirus Folders
