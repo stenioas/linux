@@ -1,4 +1,4 @@
-# Guia de pós-instalação Pop!\_Os 22.04 LTS
+# Guia de pós-instalação Pop!\_OS 22.04 LTS
 
 Guia testado em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidia.
 
