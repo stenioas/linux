@@ -1,10 +1,10 @@
 # Guia de pós-instalação Pop!\_Os 22.04 LTS
 
-O guia foi feito em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidia.
+Guia testado em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidia.
 
 <details><summary>Tabela de conteúdos</summary>
 
-- [1. Configurações iniciais](#1-configurações-iniciais)
+- [1. Configurações básicas](#1-configurações-básicas)
   - [Alterando o nome da máquina](#hostname)
   - [Habilitando arquitetura de 32 bits](#i386)
 - [2. Instalando pacotes](#2-instalando-pacotes)
@@ -35,9 +35,9 @@ O guia foi feito em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidi
 
 </details>
 
----
+<br/>
 
-## 1. Configurações iniciais
+## 1. Configurações básicas
 
 <h3 id="hostname"></h3>
 
@@ -51,11 +51,13 @@ hostnamectl set-hostname steniopc
 
 **Habilitando arquitetura de 32 bits**
 
-> **INFO:** _O comando abaixo também atualizará o sistema_
+> **ALERTA!** _O comando abaixo atualizará o sistema_
 
 ```bash
 sudo dpkg --add-architecture i386 && sudo apt update && sudo apt upgrade
 ```
+
+<br/>
 
 ## 2. Instalando pacotes
 
@@ -99,9 +101,13 @@ sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable
 curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - && echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt update && sudo apt install -y spotify-client
 ```
 
+<br/>
+
 ## 3. Restaurando backup
 
-> **EM BREVE**
+> **🚧 EM CONSTRUÇÃO 🚧**
+
+<br/>
 
 ## 4. Terminal
 
@@ -154,8 +160,6 @@ plugins=(
 
 **fzf**
 
-> **INFO:** _Conheça o repositório oficial [aqui][fzf]_
-
 Selecione "y" para todas as perguntas
 
 ```bash
@@ -166,8 +170,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
 **Starship prompt**
 
-> **INFO:** _Conheça o site oficial [aqui][starship]_
-
 ```bash
 curl -sS https://starship.rs/install.sh | sh
 ```
@@ -177,6 +179,8 @@ Adicione a linha abaixo ao arquivo `~/.zshrc`
 ```bash
 eval "$(starship init zsh)"
 ```
+
+<br/>
 
 ## 5. Ambiente de Desenvolvimento
 
@@ -226,12 +230,10 @@ asdf install nodejs lts
 
 **Docker**
 
-> **INFO:** _Baseado no [guia oficial][docker]_
-
 Pré-requisitos
 
 ```bash
-sudo apt install -y ca-certificates gnupg
+sudo apt install -y ca-certificates gnupg curl lsb-realease
 ```
 
 Adicionando chave GPG
@@ -252,19 +254,21 @@ Instalando
 sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
+<br/>
+
 ## 6. Restaurando chaves SSH
 
-> **EM BREVE**
+> **🚧 EM CONSTRUÇÃO 🚧**
 
-## 7. Jogos
+<br/>
+
+## 👾 7. Jogos
 
 > **ALERTA!** _A arquitetura de 32 bits precisa estar habilitada_
 
 <h3 id="wine"></h3>
 
 **Dependências Wine**
-
-> **INFO:** _Baseado no [Guia Lutris][lutriswinedependencies]_
 
 ```bash
 sudo apt install -y wine64 wine32 libasound2-plugins:i386 libsdl2-2.0-0:i386 libdbus-1-3:i386 libsqlite3-0:i386
@@ -284,7 +288,7 @@ sudo apt install -y lutris steam-installer
 
 League of Legends
 
-> **INFO:** _Resolve erro de inicialização do jogo_
+> **INFO:** _O comando abaixo resolve erro de inicialização do jogo_
 
 ```bash
 sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.vsyscall32=0" > /etc/sysctl.d/99-lol.conf'
@@ -295,6 +299,8 @@ sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.
 > **DICA:** Caso tenha problemas de tela preta na tela de carregamento das partidas, experimente habilitar a seguinte opção nas configurações do cliente:
 >
 > **Jogo > Gráficos > Optar pelo modo legado DX9**
+
+<br/>
 
 ## 8. Extras
 
@@ -320,8 +326,6 @@ sudo system76-power graphics nvidia && sudo reboot now
 
 Fluent-gkt-theme
 
-> **INFO:** _Conheça o repositório oficial [aqui][fluentgtktheme]_
-
 ```bash
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git && cd Fluent-gtk-theme && sudo ./install.sh -i popos --tweaks round solid
 ```
@@ -333,8 +337,6 @@ sudo apt install -y papirus-icon-theme
 ```
 
 Papirus Folders
-
-> **INFO:** _Conheça o repositório oficial [aqui][papirusfolders]_
 
 ```bash
 wget -qO- https://git.io/papirus-folders-install | sh
@@ -348,11 +350,27 @@ papirus-folders -C yaru --theme Papirus-Dark
 
 McMojave-cursors
 
-> **INFO:** _Conheça o repositório oficial [aqui][mcmojavecursors]_
-
 ```bash
 git clone https://github.com/vinceliuice/McMojave-cursors.git && cd McMojave-cursors && sudo ./install.sh
 ```
+
+---
+
+## Referências
+
+- [Repositório oficial Oh My Zsh][ohmyzsh]
+- [Repositório oficial fzf][fzf]
+- [Guia oficial Starship][starship]
+- [Guia oficial asdf-vm][asdfvm]
+- [Guia oficial Docker][docker]
+- [Guia oficial Lutris (Wine)][lutriswinedependencies]
+- [Repositório Papirus Folders][papirusfolders]
+- [Repositório Fluent Gtk Theme][fluentgtktheme]
+- [Repositório McMojave Cursors][mcmojavecursors]
+
+---
+
+**&copy; 2022 Stenio Silveira**
 
 <!-- links -->
 
