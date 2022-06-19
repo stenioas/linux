@@ -27,6 +27,7 @@ O guia foi feito em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidi
 ## 1. Configurações iniciais
 
 <span id="hostname"></span>
+
 **Alterando o nome da máquina**
 
 ```bash
