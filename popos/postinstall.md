@@ -4,43 +4,44 @@ Guia testado em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidia.
 
 <details><summary>Tabela de conteúdos</summary>
 
-- [1. Configurações básicas](#1-configurações-básicas)
+- [Configurações básicas](#🏁-configurações-básicas)
   - [Alterando o nome da máquina](#hostname)
   - [Habilitando arquitetura de 32 bits](#i386)
-- [2. Instalando pacotes](#2-instalando-pacotes)
+- [Instalando pacotes](#📦-instalando-pacotes)
   - [Codecs multimídia](#codecs)
   - [Integração de aplicações Qt](#qt-integration)
   - [Aplicações diversas](#misc-apps)
   - [Google Chrome](#google-chrome)
   - [Spotify](#spotify)
-- [3. Restaurando backup](#3-restaurando-backup)
-- [4. Terminal](#4-terminal)
+- [Restaurando backup](#💽-restaurando-backup)
+- [Terminal](#terminal)
   - [Zsh](#zsh)
   - [Oh My Zsh](#oh-my-zsh)
   - [Plugins](#zsh-plugins)
   - [fzf](#fzf)
   - [Starship prompt](#starship)
-- [5. Ambiente de Desenvolvimento](#5-ambiente-de-desenvolvimento)
+- [Ambiente de Desenvolvimento](#👨‍💻-ambiente-de-desenvolvimento)
   - [Aplicações para desenvolvimento](#code-apps)
   - [asdf-vm](#asdf)
   - [Docker](#docker)
-- [6. Restaurando chaves SSH](#🔑-6-restaurando-chaves-ssh)
-- [7. Jogos](#👾-7-jogos)
+- [Restaurando chaves SSH](#🔑-restaurando-chaves-ssh)
+- [Jogos](#🎮-jogos)
   - [Dependências Wine](#wine)
   - [Steam](#steam)
   - [Lutris](#lutris)
   - [Epic Games](#epicgames)
   - [Origin](#origin)
   - [League of Legends](#leagueoflegends)
-- [8. Extras](#8-extras)
+- [Extras](#✨-extras)
   - [Alternando perfil gráfico pelo terminal](#graphics-profile)
   - [Obtendo temas](#get-themes)
+- [Referências](#🔖-referências)
 
 </details>
 
 <br/>
 
-## 1. Configurações básicas
+## 🏁 Configurações básicas
 
 <h3 id="hostname"></h3>
 
@@ -62,7 +63,7 @@ sudo dpkg --add-architecture i386 && sudo apt update && sudo apt upgrade
 
 <br/>
 
-## 2. Instalando pacotes
+## 📦 Instalando pacotes
 
 <h3 id="codecs"></h3>
 
@@ -106,13 +107,13 @@ curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo 
 
 <br/>
 
-## 3. Restaurando backup
+## 💽 Restaurando backup
 
 > **🚧 EM CONSTRUÇÃO 🚧**
 
 <br/>
 
-## 4. Terminal
+## >\_ Terminal
 
 <h3 id="zsh"></h3>
 
@@ -183,7 +184,7 @@ eval "$(starship init zsh)"
 
 <br/>
 
-## 5. Ambiente de Desenvolvimento
+## 👨‍💻 Ambiente de Desenvolvimento
 
 <h3 id="code-apps"></h3>
 
@@ -255,13 +256,13 @@ sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io doc
 
 <br/>
 
-## 🔑 6. Restaurando chaves SSH
+## 🔑 Restaurando chaves SSH
 
 > **🚧 EM CONSTRUÇÃO 🚧**
 
 <br/>
 
-## 👾 7. Jogos
+## 🎮 Jogos
 
 > **ALERTA!** _A arquitetura de 32 bits precisa estar habilitada, acesse esse passo_ [aqui](#i386)
 
@@ -307,7 +308,7 @@ sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.
 
 <br/>
 
-## 8. Extras
+## ✨ Extras
 
 <h3 id="graphics-profile"></h3>
 
@@ -361,7 +362,7 @@ git clone https://github.com/vinceliuice/McMojave-cursors.git && cd McMojave-cur
 
 ---
 
-## Referências
+## 🔖 Referências
 
 - [Repositório oficial Oh My Zsh][ohmyzsh]
 - [Repositório oficial fzf][fzf]
