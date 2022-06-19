@@ -17,7 +17,7 @@ O guia foi feito em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidi
 - [4. Terminal](#4-terminal)
   - [Zsh](#zsh)
   - [Oh My Zsh](#oh-my-zsh)
-  - [Plugins Zsh](#zsh-plugins)
+  - [Plugins](#zsh-plugins)
   - [fzf](#fzf)
   - [Starship prompt](#starship)
 - [5. Ambiente de Desenvolvimento](#5-ambiente-de-desenvolvimento)
@@ -131,7 +131,7 @@ sudo usermod --shell $(which zsh) $USER
 
 <h3 id="zsh-plugins"></h3>
 
-**Plugins Zsh**
+**Plugins**
 
 - zsh-syntax-highlighting
 - zsh-autosuggestions
