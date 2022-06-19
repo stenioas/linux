@@ -64,7 +64,7 @@ sudo pacman -Sy
 
 <h3 id="aurhelpers"></h3>
 
-**AUR Helper**
+**AUR Helpers**
 
 <h3 id="aurhelper-yay"></h3>
 
