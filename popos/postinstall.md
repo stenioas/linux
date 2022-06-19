@@ -24,11 +24,14 @@ Guia testado em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidia.
   - [Aplicações para desenvolvimento](#code-apps)
   - [asdf-vm](#asdf)
   - [Docker](#docker)
-- [6. Restaurando chaves SSH](#6-restaurando-chaves-ssh)
-- [7. Jogos](#7-jogos)
+- [6. Restaurando chaves SSH](#🔑-6-restaurando-chaves-ssh)
+- [7. Jogos](#👾-7-jogos)
   - [Dependências Wine](#wine)
-  - [Aplicações para jogos](#game-apps)
-  - [Dicas](#tips)
+  - [Steam](#steam)
+  - [Lutris](#lutris)
+  - [Epic Games](#epicgames)
+  - [Origin](#origin)
+  - [League of Legends](#leagueoflegends)
 - [8. Extras](#8-extras)
   - [Alternando perfil gráfico pelo terminal](#graphics-profile)
   - [Obtendo temas](#get-themes)
@@ -123,8 +126,6 @@ sudo apt install -y zsh
 
 **Oh My Zsh**
 
-> **INFO:** _Conheça o repositório oficial [aqui][ohmyzsh]_
-
 ```bash
 curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh; zsh
 ```
@@ -196,8 +197,6 @@ sudo apt install -y code
 
 **asdf-vm**
 
-> **INFO:** _Conheça o site oficial [aqui][asdfvm]_
-
 ```bash
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
 ```
@@ -256,7 +255,7 @@ sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io doc
 
 <br/>
 
-## 6. Restaurando chaves SSH
+## 🔑 6. Restaurando chaves SSH
 
 > **🚧 EM CONSTRUÇÃO 🚧**
 
@@ -264,7 +263,7 @@ sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io doc
 
 ## 👾 7. Jogos
 
-> **ALERTA!** _A arquitetura de 32 bits precisa estar habilitada_
+> **ALERTA!** _A arquitetura de 32 bits precisa estar habilitada, acesse esse passo_ [aqui](#i386)
 
 <h3 id="wine"></h3>
 
@@ -274,27 +273,33 @@ sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io doc
 sudo apt install -y wine64 wine32 libasound2-plugins:i386 libsdl2-2.0-0:i386 libdbus-1-3:i386 libsqlite3-0:i386
 ```
 
-<h3 id="game-apps"></h3>
+<h3 id="steam"></h3>
 
-**Aplicações para jogos**
+**Steam**
 
 ```bash
-sudo apt install -y lutris steam-installer
+sudo apt install -y steam-installer
 ```
 
-<h3 id="tips"></h3>
+<h3 id="lutris"></h3>
 
-**Dicas**
+**Lutris**
 
-League of Legends
+```bash
+sudo apt install -y lutris
+```
 
-> **INFO:** _O comando abaixo resolve erro de inicialização do jogo_
+<h3 id="leagueoflegends"></h3>
+
+**League of Legends (Lutris)**
+
+Instale o jogo através do script Lutris [aqui][lutris-lol]
+
+Execute o comando abaixo para resolver o erro de inicialização do jogo
 
 ```bash
 sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.vsyscall32=0" > /etc/sysctl.d/99-lol.conf'
 ```
-
-- Problemas com gráficos Nvidia
 
 > **DICA:** Caso tenha problemas de tela preta na tela de carregamento das partidas, experimente habilitar a seguinte opção nas configurações do cliente:
 >
@@ -380,6 +385,7 @@ git clone https://github.com/vinceliuice/McMojave-cursors.git && cd McMojave-cur
 [asdfvm]: https://asdf-vm.com/guide/getting-started.html#_1-install-dependencies
 [docker]: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 [lutriswinedependencies]: https://github.com/lutris/docs/blob/master/WineDependencies.md#ubuntudebianubuntu-derivativesdebian-derivatives
+[lutris-lol]: https://lutris.net/games/league-of-legends/
 [fluentgtktheme]: https://github.com/vinceliuice/Fluent-gtk-theme
-[mcmojavecursors]: https://github.com/vinceliuice/McMojave-cursors
 [papirusfolders]: https://github.com/PapirusDevelopmentTeam/papirus-folders
+[mcmojavecursors]: https://github.com/vinceliuice/McMojave-cursors
