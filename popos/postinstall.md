@@ -2,10 +2,17 @@
 
 O guia foi feito em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidia.
 
-## Índice
+<details><summary>Tabela de conteúdos</summary>
 
-- [1. Iniciando](#1-iniciando)
+- [1. Configurações iniciais](#1-configurações-iniciais)
+  - [Alterando o nome da máquina](#hostname)
+  - [Habilitando arquitetura de 32 bits](#i386)
 - [2. Instalando pacotes](#2-instalando-pacotes)
+  - [Codecs multimídia](#codecs)
+  - [Integração de aplicações Qt](#appsqt)
+  - [Apps](#allapps)
+  - [Google Chrome](#google-chrome)
+  - [Spotify](#spotify)
 - [3. Restaurando backup](#3-restaurando-backup)
 - [4. Terminal](#4-terminal)
 - [5. Ambiente de Desenvolvimento](#5-ambiente-de-desenvolvimento)
@@ -13,17 +20,21 @@ O guia foi feito em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidi
 - [7. Jogos](#7-jogos)
 - [8. Extras](#8-extras)
 
-<br/>
+</details>
 
-## 1. Iniciando
+---
 
-**Alterando o hostname**
+## 1. Configurações iniciais
+
+<span id="hostname"></span>
+**Alterando o nome da máquina**
 
 ```bash
 hostnamectl set-hostname steniopc
 ```
 
-**Habilitando arquitetura 32 bits**
+<span id="i386"></span>
+**Habilitando arquitetura de 32 bits**
 
 > **INFO:** _O comando abaixo também atualizará o sistema_
 
@@ -31,21 +42,9 @@ hostnamectl set-hostname steniopc
 sudo dpkg --add-architecture i386 && sudo apt update && sudo apt upgrade
 ```
 
-**Alternando perfil gráfico**
-
-- Híbrido
-
-```bash
-sudo system76-power graphics hybrid && sudo reboot now
-```
-
-- Nvidia
-
-```bash
-sudo system76-power graphics nvidia && sudo reboot now
-```
-
 ## 2. Instalando pacotes
+
+<span id="codecs"></span>
 
 **Codecs multimídia**
 
@@ -53,11 +52,15 @@ sudo system76-power graphics nvidia && sudo reboot now
 sudo apt install -y lame libavcodec-extra ffmpeg
 ```
 
+<span id="appsqt"></span>
+
 **Integração de aplicações Qt**
 
 ```bash
 sudo apt install -y qt5ct qt5-style-kvantum qt5-style-kvantum-l10n qt5-style-kvantum-themes
 ```
+
+<span id="allapps"></span>
 
 **Apps**
 
@@ -65,11 +68,15 @@ sudo apt install -y qt5ct qt5-style-kvantum qt5-style-kvantum-l10n qt5-style-kva
 sudo apt install -y vlc gimp inkscape gnome-tweaks dconf-editor htop gparted neofetch simplescreenrecorder transmission-gtk caffeine
 ```
 
+<span id="google-chrome"></span>
+
 **Google Chrome**
 
 ```bash
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && sudo wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add - && sudo apt update && sudo apt install -y google-chrome-stable
 ```
+
+<span id="spotify"></span>
 
 **Spotify**
 
@@ -119,7 +126,7 @@ plugins=(
 )
 ```
 
-### fzf
+**fzf**
 
 > **INFO:** _Conheça o repositório oficial [aqui][fzf]_
 
@@ -129,7 +136,7 @@ Selecione "y" para todas as perguntas
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 ```
 
-### Starship prompt
+**Starship prompt**
 
 > **INFO:** _Conheça o site oficial [aqui][starship]_
 
@@ -185,7 +192,29 @@ asdf install nodejs lts
 
 **Docker**
 
-> **EM BREVE**
+> **INFO:** _Baseado no [guia oficial][docker]_
+
+```bash
+sudo apt install -y ca-certificates gnupg
+```
+
+Adicione a chave GPG
+
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg
+```
+
+Adicione o repositório
+
+```bash
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+Instale o docker
+
+```bash
+sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+```
 
 ## 6. Restaurando chaves SSH
 
@@ -194,6 +223,20 @@ asdf install nodejs lts
 ## 7. Jogos
 
 > **ALERTA!** _A arquitetura de 32 bits precisa estar habilitada_
+
+**Alternando perfil gráfico**
+
+- Híbrido
+
+```bash
+sudo system76-power graphics hybrid && sudo reboot now
+```
+
+- Nvidia
+
+```bash
+sudo system76-power graphics nvidia && sudo reboot now
+```
 
 **Dependências Wine**
 
@@ -265,11 +308,12 @@ git clone https://github.com/vinceliuice/McMojave-cursors.git && cd McMojave-cur
 
 <!-- links -->
 
-[lutriswinedependencies]: https://github.com/lutris/docs/blob/master/WineDependencies.md#ubuntudebianubuntu-derivativesdebian-derivatives
-[asdfvm]: https://asdf-vm.com/guide/getting-started.html#_1-install-dependencies
-[fluentgtktheme]: https://github.com/vinceliuice/Fluent-gtk-theme
-[mcmojavecursors]: https://github.com/vinceliuice/McMojave-cursors
-[papirusfolders]: https://github.com/PapirusDevelopmentTeam/papirus-folders
 [ohmyzsh]: https://github.com/ohmyzsh/ohmyzsh
 [fzf]: https://github.com/junegunn/fzf
 [starship]: https://starship.rs/guide/
+[asdfvm]: https://asdf-vm.com/guide/getting-started.html#_1-install-dependencies
+[docker]: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+[lutriswinedependencies]: https://github.com/lutris/docs/blob/master/WineDependencies.md#ubuntudebianubuntu-derivativesdebian-derivatives
+[fluentgtktheme]: https://github.com/vinceliuice/Fluent-gtk-theme
+[mcmojavecursors]: https://github.com/vinceliuice/McMojave-cursors
+[papirusfolders]: https://github.com/PapirusDevelopmentTeam/papirus-folders
