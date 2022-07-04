@@ -1,0 +1,24 @@
+{
+  "audio": "pipewire",
+  "bootloader": "grub-install",
+  "custom-commands": [],
+  "filesystem": "btrfs",
+  "gfx_driver": "VMware / VirtualBox (open-source)",
+  "harddrives": ["/dev/nvme0n1"],
+  "swap": true,
+  "hostname": "vbox",
+  "kernels": ["linux-lts"],
+  "keyboard-language": "br-abnt2",
+  "mirror-region": "Brazil",
+  "nic": {
+    "NetworkManager": true,
+    "nic": "Use NetworkManager (necessary to configure internet graphically in GNOME and KDE)"
+  },
+  "ntp": true,
+  "packages": [],
+  "profile": "kde",
+  "services": [],
+  "sys-encoding": "utf-8",
+  "sys-language": "pt_BR",
+  "timezone": "America/Fortaleza"
+}

@@ -1,0 +1,411 @@
+#!/usr/bin/env bash
+
+set -e
+
+# ------------------------------ #
+#
+# ----- GLOBAL VARIABLES
+
+  # --- COLORS
+    BOLD=$(tput bold)
+    RESET=$(tput sgr0)
+
+    # Regular Colors
+    BLACK=$(tput setaf 0)
+    RED=$(tput setaf 1)
+    GREEN=$(tput setaf 2)
+    YELLOW=$(tput setaf 3)
+    BLUE=$(tput setaf 4)
+    PURPLE=$(tput setaf 5)
+    CYAN=$(tput setaf 6)
+    WHITE=$(tput setaf 7)
+
+    # Bold Colors
+    BBLACK=${BOLD}${BLACK}
+    BRED=${BOLD}${RED}
+    BGREEN=${BOLD}${GREEN}
+    BYELLOW=${BOLD}${YELLOW}
+    BBLUE=${BOLD}${BLUE}
+    BPURPLE=${BOLD}${PURPLE}
+    BCYAN=${BOLD}${CYAN}
+    BWHITE=${BOLD}${WHITE}
+
+  # --- ESSENTIALS
+  
+    SPIN="/-\|" #SPINNER POSITION
+
+# ----------------------------------------------------------------------#
+
+# -------------------- BASE FUNCTIONS
+
+_set_hostname() {
+    _msg "Definindo hostname para steniopc..."
+    hostnamectl set-hostname steniopc
+}
+
+
+_install_base() {
+  _print_title "BASE"
+  _print_select "Select ${BYELLOW}KERNEL${RESET}${BCYAN} version:${RESET}"
+  KERNEL_LIST=("Linux" "Linux-lts" "Linux-zen" "Linux-hardened" "None")
+  select KERNEL_CHOICE in "${KERNEL_LIST[@]}"; do
+    if _contains_element "${KERNEL_CHOICE}" "${KERNEL_LIST[@]}"; then
+      KERNEL_CHOICE="${KERNEL_CHOICE}"
+      break;
+    else
+      _invalid_option
+    fi
+  done
+  case $KERNEL_CHOICE in
+    "Linux")
+      KERNEL_VERSION="linux"
+      ;;
+    "Linux-lts")
+      KERNEL_VERSION="linux-lts"
+      ;;
+    "Linux-zen")
+      KERNEL_VERSION="linux-zen"
+      ;;
+    "Linux-hardened")
+      KERNEL_VERSION="linux-hardened"
+      ;;
+    "None")
+      KERNEL_VERSION="None"
+      ;;
+  esac
+  _print_title "BASE"
+  _print_select "Select microcode:${RESET}"
+  MICROCODE_LIST=("amd-ucode" "intel-ucode" "None")
+  select MICROCODE_CHOICE in "${MICROCODE_LIST[@]}"; do
+    if _contains_element "${MICROCODE_CHOICE}" "${MICROCODE_LIST[@]}"; then
+      MICROCODE_CHOICE="${MICROCODE_CHOICE}"
+      break;
+    else
+      _invalid_option
+    fi
+  done
+  case ${MICROCODE_CHOICE} in
+    "amd-ucode")
+      MICROCODE_VERSION="amd-ucode"
+      ;;
+    "intel-ucode")
+      MICROCODE_VERSION="intel-ucode"
+      ;;
+    "None")
+      MICROCODE_VERSION="None"
+      ;;
+  esac
+  _print_title "BASE"
+  echo
+  _print_item "Kernel version" "${KERNEL_VERSION}"
+  _print_item "Microcode" "${MICROCODE_VERSION}"
+  _print_subtitle "Packages"
+  _pacstrap_install "base base-devel"
+  if [[ "${KERNEL_VERSION}" != "None" ]]; then
+    _pacstrap_install "${KERNEL_VERSION}"
+    _pacstrap_install "${KERNEL_VERSION}-headers"
+    _pacstrap_install "linux-firmware"
+  fi
+  if [[ "${MICROCODE_VERSION}" != "None" ]]; then
+    _pacstrap_install "${MICROCODE_VERSION}"
+  fi
+  _pacstrap_install "btrfs-progs nano"
+  _pacstrap_install "networkmanager"
+  _print_subtitle "Services"
+  _print_action "Enabling" "NetworkManager"
+  arch-chroot ${ROOT_MOUNTPOINT} systemctl enable NetworkManager &> /dev/null & PID=$!; _progress $PID
+  _pause_function
+}
+
+# ----------- COMMOM FUNCTIONS
+
+_print_line() {
+  T_COLS=$(tput cols)
+  echo -e "${BBLACK}$(seq -s '-' $(( T_COLS + 1 )) | tr -d "[:digit:]")${RESET}"
+}
+
+_print_title() {
+  clear
+  T_COLS=$(tput cols)
+  BORDER_COLOR=${BBLACK}
+  COLS_APP_VERSION=${#APP_VERSION}
+  COLS_APP_TITLE=${#APP_TITLE}
+  COLS_TITLE=${#1}
+  echo -ne "${BBLACK}[${RESET}${BGREEN} $1 ${RESET}${BBLACK}]${RESET}"
+  echo -ne "${BORDER_COLOR}$(seq -s ' ' $(( T_COLS - COLS_APP_TITLE - COLS_APP_VERSION - COLS_TITLE - 6 )) | tr -d "[:digit:]")${RESET}"
+  echo -e "${BBLACK} ${APP_TITLE} ${APP_VERSION}${RESET}"
+}
+
+_print_subtitle() {
+  echo -e "\n${BWHITE}:: $1${RESET}\n"
+}
+
+_print_select() {
+  echo -e "\n${BWHITE}$1${RESET}\n"
+}
+
+_print_item() {
+  REM_COLS=$(( 23 - ${#1} ))
+  echo -ne "${BBLACK}$1:${RESET}"
+  echo -ne "${BBLACK}$(seq -s ' ' $REM_COLS | tr -d "[:digit:]")${RESET}"
+  echo -e "${WHITE}$2${RESET}"
+}
+
+_print_items() {
+  echo -e "${BBLACK}$1:${RESET}"
+  echo -e "${WHITE}$2${RESET}" | fold -sw $(( T_COLS - 1 ))
+}
+
+_print_info() {
+  T_COLS=$(tput cols)
+  echo -e "${BBLUE}INFO:${RESET}${WHITE} $1${RESET}" | fold -sw $(( T_COLS - 1 ))
+}
+
+_print_warning() {
+  T_COLS=$(tput cols)
+  echo -e "${BYELLOW}WARNING:${RESET}${WHITE} $1${RESET}" | fold -sw $(( T_COLS - 1 ))
+}
+
+_print_danger() {
+  T_COLS=$(tput cols)
+  echo -e "${BRED}DANGER:${RESET}${WHITE} $1${RESET}" | fold -sw $(( T_COLS - 1 ))
+}
+
+_print_action() {
+  echo -ne "${BBLACK}$1 ${RESET}${WHITE}$2 ${RESET}"
+  tput sc
+}
+
+_print_ok() {
+  tput rc
+  echo -e "${BGREEN}done${RESET}"
+}
+
+_print_error() {
+  tput rc
+  echo -e "${BRED}error${RESET}"
+}
+
+_progress() {
+  _spinny() {
+    tput cuf 2
+    echo -ne "\b${BBLACK}${SPIN:i++%${#SPIN}:1}${RESET}"
+  }
+  tput civis
+  while true; do
+    if kill -0 "$PID" &> /dev/null; then
+    #if [[ $? == 0 ]]; then
+      tput rc
+      _spinny
+      sleep 0.2
+    else
+      wait "$PID"
+      RETCODE=$?
+      if [ $RETCODE == 0 ] || [ $RETCODE == 255 ]; then
+        _print_ok
+      else
+        _print_error
+      fi
+      break
+    fi
+  done
+  tput cnorm
+}
+
+_print_bye() {
+  echo -e "\n${BGREEN}Bye!${RESET}\n"
+}
+
+_read_input_text() {
+  printf "%s" "${BGREEN}$1 ${RESET}"
+}
+
+_read_input_option() {
+  printf "%s" "${BGREEN}$1${RESET}"
+  read -r OPTION
+}
+
+_contains_element() {
+  for e in "${@:2}"; do [[ "$e" = "$1" ]] && break; done;
+}
+
+_invalid_option() {
+  echo
+  _print_warning "Invalid option. Try again..."
+}
+
+_pause_function() {
+  echo
+  _print_line
+  read -e -sn 1 -p "${BGREEN}Press any key to continue...${RESET}"
+}
+
+_umount_partitions() {
+  umount -R "${ROOT_MOUNTPOINT}" &> /dev/null
+}
+
+_is_package_installed() {
+  for PKG in $1; do
+    pacman -Q "$PKG" &> /dev/null && return 0;
+  done
+  return 1
+}
+
+_package_install() { # Install pacman packages
+  for PKG in $1; do
+    if ! _is_package_installed "${PKG}"; then
+      _print_action "Installing" "${PKG}"
+      if [[ $(id -u) == 0 ]]; then
+        pacman -S --noconfirm --needed "${PKG}" &> /dev/null & PID=$!; _progress $PID
+      else
+        sudo pacman -S --noconfirm --needed "${PKG}" &> /dev/null & PID=$!; _progress $PID
+      fi
+    else
+      _print_action "Installing" "${PKG}"
+      tput rc
+      echo -e "${YELLOW}exists${RESET}"
+    fi
+  done
+}
+
+usage() {
+  cat <<EOF
+
+usage: ${0##*/} [flags]
+
+ Flag options:
+
+  --install | -i         First step, only root user.
+  --post    | -p         Second step, only root user.
+
+${APP_TITLE} ${APP_VERSION}
+
+EOF
+}
+
+_start() {
+  clear
+  T_COLS=$(tput cols)
+  COLS_LOGO=47
+  echo -e "\n\n\n\n\n"
+  tput cuf $(( (T_COLS - COLS_LOGO)/2 )); echo "${BGREEN}┌─────────────────────────────────────────────┐${RESET}"
+  tput cuf $(( (T_COLS - COLS_LOGO)/2 )); echo "${BGREEN}│${RESET}${BBLACK}   __   __  _______  ___      _______  ___ ${RESET}${BGREEN}  │${RESET}"
+  tput cuf $(( (T_COLS - COLS_LOGO)/2 )); echo "${BGREEN}│${RESET}${BBLACK}  |  |_|  ||   _   ||   |    |       ||   |${RESET}${BGREEN}  │${RESET}"
+  tput cuf $(( (T_COLS - COLS_LOGO)/2 )); echo "${BGREEN}│${RESET}${BBLACK}  |       ||  |_|  ||   |    |    _  ||   |${RESET}${BGREEN}  │${RESET}"
+  tput cuf $(( (T_COLS - COLS_LOGO)/2 )); echo "${BGREEN}│${RESET}${BBLACK}  |       ||       ||   |    |   |_| ||   |${RESET}${BGREEN}  │${RESET}"
+  tput cuf $(( (T_COLS - COLS_LOGO)/2 )); echo "${BGREEN}│${RESET}${BBLACK}  |       ||       ||   |___ |    ___||   |${RESET}${BGREEN}  │${RESET}"
+  tput cuf $(( (T_COLS - COLS_LOGO)/2 )); echo "${BGREEN}│${RESET}${BBLACK}  | ||_|| ||   _   ||       ||   |    |   |${RESET}${BGREEN}  │${RESET}"
+  tput cuf $(( (T_COLS - COLS_LOGO)/2 )); echo "${BGREEN}│${RESET}${BBLACK}  |_|   |_||__| |__||_______||___|    |___|${RESET}${BGREEN}  │${RESET}"
+  tput cuf $(( (T_COLS - COLS_LOGO)/2 )); echo "${BGREEN}│                                             │${RESET}"
+  tput cuf $(( (T_COLS - COLS_LOGO)/2 )); echo "${BGREEN}└───── ${BGREEN}My Personal Arch Linux Installer${RESET}${BGREEN} ──────┘${RESET}"
+  echo
+  tput cuf $(( (T_COLS - 18)/2 )); echo -e "${BPURPLE}By Stenio Silveira${RESET}"
+  echo -e "\n\n\n"
+  tput cuf $(( (T_COLS - 23)/2 )); read -e -sn 1 -p "${BWHITE}Press any key to start!${RESET}"
+  _print_title "CHECKING REQUIREMENTS"
+  echo
+  _check_archlinux
+  _check_uefimode
+  _check_connection
+  _check_root
+  _check_hostname
+  _check_pacman_blocked
+  _print_action "Synchronizing" "Pacman database"
+  pacman -Syy &> /dev/null & PID=$!; _progress $PID
+  _print_action "Running" "timedatectl set-ntp true"
+  timedatectl set-ntp true & PID=$!; _progress $PID
+  _pause_function
+}
+
+# ----------- TEST FUNCTIONS
+
+_check_archlinux() {
+  _print_action "Checking" "Arch Linux Release"
+  if [ -e /etc/arch-release ]; then
+    _print_ok
+  else
+    _print_error
+    echo
+    _print_warning "You must execute the script on ${BYELLOW}Arch Linux${RESET}."
+    _print_bye
+    exit 1
+  fi
+}
+
+_check_connection() {
+  _connection_test() {
+    ping -q -w 1 -c 1 "$(ip r | grep default | awk 'NR==1 {print $3}')" &> /dev/null && return 1 || return 0
+  }
+  _print_action "Checking" "Internet connection"
+  if ! _connection_test; then
+    _print_ok
+  else
+    _print_error
+    echo
+    _print_warning "You must be connected to the internet to execute the script."
+    _print_bye
+    exit 1
+  fi
+}
+
+_check_root() {
+  _print_action "Checking" "Root user"
+  if [ "$(id -u)" == "0" ]; then
+    _print_ok
+  else
+    _print_error
+    echo
+    _print_warning "You must execute the script as 'root' user."
+    _print_bye
+    exit 1
+  fi
+}
+
+_check_hostname() {
+  _print_action "Checking" "Hostname"
+  if [ "${HOSTNAME// /}" != "" ]; then
+    _print_ok
+  else
+    _print_error
+    echo
+    _print_warning "Hostname must be configured!"
+    _print_bye
+    exit 1
+  fi
+}
+
+_check_pacman_blocked() {
+  _print_action "Checking" "Pacman lock"
+  if [ ! -f /var/lib/pacman/db.lck ]; then
+    _print_ok
+  else
+    _print_error
+    echo
+    _print_warning "Pacman is blocked. If not running remove /var/lib/pacman/db.lck."
+    _print_bye
+    exit 1
+  fi
+}
+
+# ----------------------------------------------------------------------#
+
+### EXECUTION
+
+[[ -z $1 ]] && {
+    usage
+    exit 1
+}
+
+_start
+
+while [[ "$1" ]]; do
+  case "$1" in
+    "--install"|"-i") _setup_install;;
+    "--post"|"-p") _setup_post;;
+  esac
+  shift
+  setfont
+  clear
+  _print_bye
+  exit 0
+done

@@ -1,18 +1,18 @@
-# Guia de pós-instalação Pop!\_OS 22.04 LTS
+# Guia de pós-instalação Archlinux
 
 Guia testado em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidia.
 
 <details><summary>Tabela de conteúdos</summary>
 
 - [Configurações básicas](#🏁-configurações-básicas)
-  - [Alterando o nome da máquina](#hostname)
-  - [Habilitando arquitetura de 32 bits](#i386)
+  - [Habilitando arquitetura de 32 bits](#multilib)
 - [Instalando pacotes](#📦-instalando-pacotes)
-  - [Codecs multimídia](#codecs)
-  - [Integração de aplicações Qt](#qt-integration)
+  - [AUR Helpers](#aurhelpers)
+    - [yay](#aurhelper-yay)
+    - [Pamac](#aurhelper-pamac)
   - [Aplicações diversas](#misc-apps)
-  - [Google Chrome](#google-chrome)
-  - [Spotify](#spotify)
+  - [Pacotes AUR](#aur-apps)
+  - [Gnome](#misc-apps-gnome)
 - [Restaurando backup](#💽-restaurando-backup)
 - [Terminal](#terminal)
   - [Zsh](#zsh)
@@ -25,15 +25,13 @@ Guia testado em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidia.
   - [asdf-vm](#asdf)
   - [Docker](#docker)
 - [Restaurando chaves SSH](#🔑-restaurando-chaves-ssh)
+- [Drivers de vídeo](#👾-drivers-de-vídeo)
 - [Jogos](#🎮-jogos)
   - [Dependências Wine](#wine)
   - [Steam](#steam)
   - [Lutris](#lutris)
-  - [Epic Games](#epicgames)
-  - [Origin](#origin)
   - [League of Legends](#leagueoflegends)
 - [Extras](#✨-extras)
-  - [Alternando perfil gráfico pelo terminal](#graphics-profile)
   - [Obtendo temas](#get-themes)
 - [Referências](#🔖-referências)
 
@@ -43,42 +41,45 @@ Guia testado em um Acer Nitro 5 an515-44, utilizando a ISO com drivers Nvidia.
 
 ## 🏁 Configurações básicas
 
-<h3 id="hostname"></h3>
+<h3 id="multilib"></h3>
 
-**Alterando o nome da máquina**
+**Habilitando arquitetura 32 bits**
+
+Descomente a seção `[multilib]` do arquivo `/etc/pacman.conf`
 
 ```bash
-hostnamectl set-hostname steniopc
+[multilib]
+Include = /etc/pacman.d/mirrorlist
 ```
 
-<h3 id="i386"></h3>
-
-**Habilitando arquitetura de 32 bits**
-
-> **ALERTA!** _O comando abaixo atualizará o sistema_
+Atualize a base de dados dos repositórios
 
 ```bash
-sudo dpkg --add-architecture i386 && sudo apt update && sudo apt upgrade
+sudo pacman -Sy
 ```
 
 <br/>
 
 ## 📦 Instalando pacotes
 
-<h3 id="codecs"></h3>
+<h3 id="aurhelpers"></h3>
 
-**Codecs multimídia**
+**AUR Helpers**
+
+<h3 id="aurhelper-yay"></h3>
+
+Yay
 
 ```bash
-sudo apt install -y lame libavcodec-extra ffmpeg
+sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 ```
 
-<h3 id="qt-integration"></h3>
+<h3 id="aurhelper-pamac"></h3>
 
-**Integração de aplicações Qt**
+Pamac
 
 ```bash
-sudo apt install -y qt5ct qt5-style-kvantum qt5-style-kvantum-l10n qt5-style-kvantum-themes
+sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/pamac-aur.git && cd pamac-aur && makepkg -si
 ```
 
 <h3 id="misc-apps"></h3>
@@ -86,23 +87,37 @@ sudo apt install -y qt5ct qt5-style-kvantum qt5-style-kvantum-l10n qt5-style-kva
 **Aplicações diversas**
 
 ```bash
-sudo apt install -y vlc gimp inkscape gnome-tweaks dconf-editor htop gparted neofetch simplescreenrecorder transmission-gtk caffeine
+sudo pacman -S --needed firefox firefox-i18n-pt-br ntfs-3g glxgears git htop bashtop neofetch gimp inkscape vlc dconf-editor
 ```
 
-<h3 id="google-chrome"></h3>
+<h3 id="aur-apps"></h3>
 
-**Google Chrome**
+**Pacotes AUR**
 
 ```bash
-sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && sudo wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add - && sudo apt update && sudo apt install -y google-chrome-stable
+yay -S google-chrome spotify
 ```
 
-<h3 id="spotify"></h3>
+<h3 id="misc-apps-gnome"></h3>
 
-**Spotify**
+**Gnome**
+
+Indicador de apps na bandeja
 
 ```bash
-curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - && echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt update && sudo apt install -y spotify-client
+sudo pacman -S --needed gnome-shell-extension-appindicator
+```
+
+Integração de aplicações Qt
+
+```bash
+sudo pacman -S --needed qt5ct kvantum-qt5
+```
+
+Definindo variável de ambiente
+
+```bash
+sudo sh -c 'echo "QT_QPA_PLATFORMTHEME=qt5ct" >> /etc/environment'
 ```
 
 <br/>
@@ -120,7 +135,7 @@ curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo 
 **Zsh**
 
 ```bash
-sudo apt install -y zsh
+sudo pacman -S --needed zsh zsh-completions
 ```
 
 <h3 id="oh-my-zsh"></h3>
@@ -173,7 +188,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 **Starship prompt**
 
 ```bash
-curl -sS https://starship.rs/install.sh | sh
+sudo pacman -S --needed starship
 ```
 
 Adicione a linha abaixo ao arquivo `~/.zshrc`
@@ -191,7 +206,7 @@ eval "$(starship init zsh)"
 **Aplicações para desenvolvimento**
 
 ```bash
-sudo apt install -y code
+yay -S visual-studio-code-bin
 ```
 
 <h3 id="asdf"></h3>
@@ -199,16 +214,16 @@ sudo apt install -y code
 **asdf-vm**
 
 ```bash
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
+yay -S asdf-vm
 ```
 
 Adicione a linha abaixo ao arquivo `~/.zshrc`
 
 ```bash
-. $HOME/.asdf/asdf.sh
+. /opt/asdf-vm/asdf.sh
 ```
 
-Recarregue as configurações do zsh
+Recarregar as configurações do zsh
 
 ```bash
 source ~/.zshrc
@@ -230,28 +245,8 @@ asdf install nodejs lts
 
 **Docker**
 
-Pré-requisitos
-
 ```bash
-sudo apt install -y ca-certificates gnupg curl lsb-realease
-```
-
-Adicionando chave GPG
-
-```bash
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg
-```
-
-Adicionando repositório
-
-```bash
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-
-Instalando
-
-```bash
-sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo pacman -S --needed docker docker-compose
 ```
 
 <br/>
@@ -262,16 +257,78 @@ sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io doc
 
 <br/>
 
+## 👾 Drivers de vídeo
+
+> **INFO:** _Adiciona suporte a vulkan_
+
+<h3 id="driver-intel"></h3>
+
+**Intel**
+
+```bash
+sudo pacman -S --needed lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader
+```
+
+<h3 id="driver-amd"></h3>
+
+**AMD**
+
+```bash
+sudo pacman -S --needed lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader
+```
+
+<h3 id="driver-nvidia"></h3>
+
+**NVIDIA**
+
+> **ALERTA!** O pacote `nvidia-lts` é recomendado caso você utilize o kernel `linux-lts`, para o kernel `linux` utilize o pacote `nvidia`
+
+```bash
+sudo pacman -S --needed nvidia-lts nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader
+```
+
+<h3 id="optimus-manager"></h3>
+
+**Optimus Manager**
+
+```bash
+yay -S optimus-manager
+```
+
+Arquivo de configuração
+
+```bash
+sudo cp /usr/share/optimus-manager.conf /etc/optimus-manager/optimus-manager.conf
+```
+
+Gnome
+
+> **ALERTA!** _O gdm não é compatível com o optimus-manager, substitua-o pela versão com o patch_
+
+```bash
+yay -S gdm-prime
+```
+
+KDE Plasma
+
+> **INFO:** _Optimus Manager na tray do Plasma_
+
+```bash
+yay -S optimus-manager-qt
+```
+
+<br/>
+
 ## 🎮 Jogos
 
-> **ALERTA!** _A arquitetura de 32 bits precisa estar habilitada, acesse esse passo_ [aqui](#i386)
+> **ALERTA!** _A arquitetura de 32 bits precisa estar habilitada, acesse esse passo_ [aqui](#multilib)
 
 <h3 id="wine"></h3>
 
 **Dependências Wine**
 
 ```bash
-sudo apt install -y wine64 wine32 libasound2-plugins:i386 libsdl2-2.0-0:i386 libdbus-1-3:i386 libsqlite3-0:i386
+sudo pacman -S --needed wine-staging wine-mono giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error lib32-libgpg-error alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-libgcrypt libgcrypt lib32-libxinerama ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader
 ```
 
 <h3 id="steam"></h3>
@@ -279,7 +336,7 @@ sudo apt install -y wine64 wine32 libasound2-plugins:i386 libsdl2-2.0-0:i386 lib
 **Steam**
 
 ```bash
-sudo apt install -y steam-installer
+sudo pacman -S --needed steam
 ```
 
 <h3 id="lutris"></h3>
@@ -287,7 +344,7 @@ sudo apt install -y steam-installer
 **Lutris**
 
 ```bash
-sudo apt install -y lutris
+sudo pacman -S --needed lutris
 ```
 
 <h3 id="leagueoflegends"></h3>
@@ -310,42 +367,32 @@ sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.
 
 ## ✨ Extras
 
-<h3 id="graphics-profile"></h3>
-
-**Alternando perfil gráfico pelo terminal**
-
-Híbrido
-
-```bash
-sudo system76-power graphics hybrid && sudo reboot now
-```
-
-Nvidia
-
-```bash
-sudo system76-power graphics nvidia && sudo reboot now
-```
-
 <h3 id="get-themes"></h3>
 
 **Obtendo temas**
 
+Adwaita para aplicativos legado
+
+```bash
+yay -S adw-gtk3-git
+```
+
 Fluent-gkt-theme
 
 ```bash
-git clone https://github.com/vinceliuice/Fluent-gtk-theme.git && cd Fluent-gtk-theme && sudo ./install.sh -i popos --tweaks round solid
+git clone https://github.com/vinceliuice/Fluent-gtk-theme.git && cd Fluent-gtk-theme && sudo ./install.sh -i arch --tweaks round solid
 ```
 
 Papirus Icon Theme
 
 ```bash
-sudo apt install -y papirus-icon-theme
+sudo pacman -S --needed papirus-icon-theme
 ```
 
 Papirus Folders
 
 ```bash
-wget -qO- https://git.io/papirus-folders-install | sh
+yay -S papirus-folders-git
 ```
 
 Definindo a cor das pastas
@@ -368,8 +415,9 @@ git clone https://github.com/vinceliuice/McMojave-cursors.git && cd McMojave-cur
 - [Repositório oficial fzf][fzf]
 - [Guia oficial Starship][starship]
 - [Guia oficial asdf-vm][asdfvm]
-- [Guia oficial Docker][docker]
+- [Guia do Docker na archwiki][archwiki-docker]
 - [Guia oficial Lutris (Wine)][lutriswinedependencies]
+- [Guia oficial Lutris (Drivers)][lutrisinstallingdrivers]
 - [Repositório Papirus Folders][papirusfolders]
 - [Repositório Fluent Gtk Theme][fluentgtktheme]
 - [Repositório McMojave Cursors][mcmojavecursors]
@@ -383,10 +431,14 @@ git clone https://github.com/vinceliuice/McMojave-cursors.git && cd McMojave-cur
 [ohmyzsh]: https://github.com/ohmyzsh/ohmyzsh
 [fzf]: https://github.com/junegunn/fzf
 [starship]: https://starship.rs/guide/
+[yay]: https://github.com/Jguer/yay
 [asdfvm]: https://asdf-vm.com/guide/getting-started.html#_1-install-dependencies
-[docker]: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
-[lutriswinedependencies]: https://github.com/lutris/docs/blob/master/WineDependencies.md#ubuntudebianubuntu-derivativesdebian-derivatives
+[archwiki-docker]: https://wiki.archlinux.org/title/docker#Installation
+[lutrisinstallingdrivers]: https://github.com/lutris/docs/blob/master/InstallingDrivers.md#arch--manjaro--other-arch-linux-derivatives
+[optimusmanager]: https://github.com/Askannz/optimus-manager
+[lutriswinedependencies]: https://github.com/lutris/docs/blob/master/WineDependencies.md#archantergosmanjaroother-arch-derivatives
 [lutris-lol]: https://lutris.net/games/league-of-legends/
+[adwgtk3]: https://github.com/lassekongo83/adw-gtk3
 [fluentgtktheme]: https://github.com/vinceliuice/Fluent-gtk-theme
 [papirusfolders]: https://github.com/PapirusDevelopmentTeam/papirus-folders
 [mcmojavecursors]: https://github.com/vinceliuice/McMojave-cursors

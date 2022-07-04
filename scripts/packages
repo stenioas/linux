@@ -1,0 +1,48 @@
+# ARQUIVO DE PACOTES
+#==================================================
+
+#--------------------------------------------------
+# CODECS
+pkgs_codecs="
+  lame \
+  libavcodec-extra \
+  ffmpeg
+"
+
+#--------------------------------------------------
+# INTEGRAÇÃO QT/GTK
+pkgs_qt="
+  qt5ct \
+  qt5-style-kvantum \
+  qt5-style-kvantum-l10n \
+  qt5-style-kvantum-themes
+"
+
+#--------------------------------------------------
+# ESSENCIAIS
+pkgs_misc="
+  vlc \
+  gimp \
+  inkscape \
+  gnome-tweaks \
+  dconf-editor \
+  htop \
+  gparted \
+  neofetch \
+  simplescreenrecorder \
+  transmission-gtk \
+  caffeine
+"
+
+#--------------------------------------------------
+# GAMES
+pkgs_games="
+  wine64 \
+  wine32 \
+  libasound2-plugins:i386 \
+  libsdl2-2.0-0:i386 \
+  libdbus-1-3:i386 \
+  libsqlite3-0:i386 \
+  lutris \
+  steam-installer
+"

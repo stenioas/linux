@@ -1,0 +1,44 @@
+# ARQUIVO DE CONFIGURAÇÃO
+#==================================================
+
+#--------------------------------------------------
+# MODO TESTE
+# Utilizado para simular instalação de pacotes pelo apt
+# deixe a linha comentada se deseja usar em produção
+testing="--dry-run"
+
+#--------------------------------------------------
+# NOME DA MÁQUINA
+# Define o nome do host
+hostname="steniopc"
+
+#--------------------------------------------------
+# ARQUITETURA i386
+# Habilita ou não a arquitetura i386
+# comente para desabilitar
+i386="on"
+
+#--------------------------------------------------
+# SHELL PADRÃO
+# valores possíveis:
+#   zsh
+#   bash
+default_shell="zsh"
+
+#--------------------------------------------------
+# ASDF-VM
+# Habilita ou não a instalação do asdf-vm
+# comente para desabilitar
+asdf="on"
+
+#--------------------------------------------------
+# DOCKER
+# Habilita ou não a instalação do Docker
+# comente para desabilitar
+docker="on"
+
+#--------------------------------------------------
+# ZRAM
+# Habilita ou não a configuração de zram
+# comente para desabilitar
+zram="on"

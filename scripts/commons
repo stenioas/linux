@@ -1,0 +1,107 @@
+#==================================================
+# VARIÁVEIS E FUNÇÕES BASE
+#==================================================
+
+#--------------------------------------------------
+# CORES
+BOLD=$(tput bold)
+RESET=$(tput sgr0)
+
+BLACK=$(tput setaf 0)
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+BLUE=$(tput setaf 4)
+PURPLE=$(tput setaf 5)
+CYAN=$(tput setaf 6)
+WHITE=$(tput setaf 7)
+
+BBLACK=${BOLD}${BLACK}
+BRED=${BOLD}${RED}
+BGREEN=${BOLD}${GREEN}
+BYELLOW=${BOLD}${YELLOW}
+BBLUE=${BOLD}${BLUE}
+BPURPLE=${BOLD}${PURPLE}
+BCYAN=${BOLD}${CYAN}
+BWHITE=${BOLD}${WHITE}
+
+#--------------------------------------------------
+# CONSTANTES
+T_COLS=$(tput cols)
+T_CIVIS=$(tput civis)
+T_CNORM=$(tput cnorm)
+T_SC=$(tput sc)
+T_RC=$(tput rc)
+
+#--------------------------------------------------
+# FUNÇÕES COMUNS
+
+_print_title() {
+  echo -e "\n${BYELLOW}==[ ${BWHITE}$1 ${BYELLOW}]${RESET}"
+  _print_line
+}
+
+_print_subtitle() {
+  echo -e "${BWHITE}==> ${BYELLOW}$1${RESET}"
+}
+
+_print_item() {
+  local cols_item=${#1}
+  echo -ne " --> $1 ${CYAN}$(seq -s '.' $(( T_COLS - cols_item - 63 )) | tr -d "[:digit:]") ${RESET}"
+  tput sc
+}
+
+_print_action() {
+  local cols_action=${#1}
+  local cols_item=${#2}
+  echo -ne " --> $1 $2 ${CYAN}$(seq -s '.' $(( T_COLS - cols_action - cols_item - 64 )) | tr -d "[:digit:]") ${RESET}"
+  tput sc
+}
+
+_print_line() {
+  echo -e "${BWHITE}$(seq -s '-' $(( T_COLS + 1 )) | tr -d "[:digit:]")${RESET}"
+}
+
+_print_ok() {
+  tput rc
+  echo -e "${BCYAN}[${BGREEN} OK ${BCYAN}]${RESET}"
+}
+
+_print_error() {
+  tput rc
+  echo -e "${BCYAN}[${BRED}ERRO${BCYAN}]${RESET}"
+}
+
+_print_msg() {
+  echo -e "\n${BBLUE}==> ${BWHITE}$1${RESET}"
+}
+
+_progress() {
+  tput civis
+  _spinny() {
+    local spin="/-\|"
+    tput cuf 1
+    echo -ne "\b${BGREEN}${spin:i++%${#spin}:1}${RESET}"
+  }
+  while true; do
+    if kill -0 "$PID" &> /dev/null; then
+      tput rc
+      _spinny
+      sleep 0.2
+    else
+      wait "$PID"
+      retcode=$?
+      if [ $retcode == 0 ] || [ $retcode == 255 ]; then
+        _print_ok
+      else
+        _print_error
+      fi
+      break
+    fi
+  done
+  tput cnorm
+}
+
+_pause() {
+  read -e -sn 1 -p "  ${BGREEN}Pressione qualquer tecla para prosseguir...${RESET}"
+}
