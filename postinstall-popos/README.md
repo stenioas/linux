@@ -1,7 +1,5 @@
 # Guia de pós-instalação Pop!\_OS 22.04 LTS
 
-<br/>
-
 <details><summary>Tabela de conteúdos</summary>
 
 - [Info](#info)
@@ -43,15 +41,13 @@
 
 <span id="info"></span>
 
-<br/>
-
 ## ℹ️ Info
 
 💡 Guia testado em um **Acer Nitro 5 an515-44**, utilizando a ISO com drivers **Nvidia**.
 
-<span id="configuracoes-essenciais"></span>
+💡 A maioria das aplicações descritas neste guia podems ser encontradas diretamente na **Pop!\_Shop**, a loja de aplicativos do próprio sistema.
 
-<br/>
+<span id="configuracoes-essenciais"></span>
 
 ## 1️⃣ Configurações Essenciais
 
@@ -78,8 +74,6 @@ sudo apt update && sudo apt upgrade -y
 ```
 
 <span id="instalando-pacotes"></span>
-
-<br/>
 
 ## 📦 Instalando 5kg de Pacotes
 
@@ -182,15 +176,11 @@ flatpak install -y flathub com.microsoft.Teams
 
 <span id="restaurando-backup"></span>
 
-<br/>
-
 ## 💾 Restaurando backup
 
 > **🚧 EM BREVE 🚧**
 
 <span id="terminal"></span>
-
-<br/>
 
 ## ⬛ Terminal
 
@@ -249,8 +239,6 @@ echo -e '# Starship prompt\neval "$(starship init zsh)"' >> ~/.zshrc
 
 <span id="preparado-pra-codar"></span>
 
-<br/>
-
 ## 👨‍💻 Preparado pra Codar?
 
 ### Visual Studio Code
@@ -305,15 +293,11 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 
 <span id="chaves-ssh"></span>
 
-<br/>
-
 ## 🔑 Chaves de cadeia SSH
 
 > **🚧 EM BREVE 🚧**
 
 <span id="jogos"></span>
-
-<br/>
 
 ## 🎮 Jogatinas
 
@@ -352,8 +336,6 @@ sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.
 💡 **dica:** Caso tenha problemas de tela preta durante o carregamento das partidas, experimente habilitar a seguinte opção nas configurações do cliente:
 
 > **Jogo > Gráficos > Optar pelo modo legado DX9**
-
-<br/>
 
 ## ✨ Extras
 
