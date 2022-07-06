@@ -3,26 +3,25 @@
 <details><summary>Tabela de conteúdos</summary>
 
 - [Info](#info)
-- [Configurações Essenciais](#configuracoes-essenciais)
+- [Começando](#comecando)
   - [Alterando o nome da máquina](#alterando-o-nome-da-máquina)
   - [Habilitando arquitetura i386](#habilitando-arquitetura-i386)
   - [Atualizando o sistema](#atualizando-o-sistema)
-- [Instalando Pacotes](#instalando-pacotes)
+- [Aplicações](#aplicacoes)
   - [Codecs multimídia](#codecs)
-  - [Aplicações Úteis](#aplicações-úteis)
+  - [Diversos](#diversos)
   - [Google Chrome](#google-chrome)
   - [Brave](#brave)
   - [Spotify](#spotify)
   - [Microsoft Edge](#microsoft-edge)
   - [Microsoft Teams](#microsoft-teams)
-- [Restaurando backup](#restaurando-backup)
-- [Terminal](#terminal)
+- [Terminal](#term)
   - [Zsh](#zsh)
   - [Oh My Zsh](#oh-my-zsh)
   - [Plugins](#zsh-plugins)
   - [fzf](#fzf)
   - [Starship prompt](#starship)
-- [Preparado pra Codar?](#preparado-pra-codar)
+- [Ambiente Dev](#ambiente-dev)
   - [Visual Studio Code](#visual-studio-code)
   - [asdf-vm](#asdf)
   - [Docker](#docker)
@@ -41,19 +40,15 @@
 
 <span id="info"></span>
 
-## ℹ️ Info
-
-💡 Guia testado em um **Acer Nitro 5 an515-44**, utilizando a ISO com drivers **Nvidia**.
+## Info
 
 💡 A maioria das aplicações descritas neste guia podems ser encontradas diretamente na **Pop!\_Shop**, a loja de aplicativos do próprio sistema.
 
-<span id="configuracoes-essenciais"></span>
+<span id="comecando"></span>
 
-## 1️⃣ Configurações Essenciais
+## Começando
 
 ### Alterando o nome da máquina
-
-💡 **info:** Por padrão o nome da máquina é `pop-os`, eu altero para identificar melhor em minha rede.
 
 ```bash
 hostnamectl set-hostname "nome_da_maquina"
@@ -61,7 +56,7 @@ hostnamectl set-hostname "nome_da_maquina"
 
 ### Habilitando arquitetura i386
 
-💡 **info:** Algumas aplicações, como alguns jogos, necessitam de pacotes 32 bits para funcionar, isso habilita o suporte a arquitetura.
+💡 **info:** Aplicações 32 bits necessitam dessa arquitetura habilitada para funcionar.
 
 ```bash
 sudo dpkg --add-architecture i386
@@ -73,9 +68,9 @@ sudo dpkg --add-architecture i386
 sudo apt update && sudo apt upgrade -y
 ```
 
-<span id="instalando-pacotes"></span>
+<span id="aplicacoes"></span>
 
-## 📦 Instalando 5kg de Pacotes
+## Aplicações
 
 ### Codecs multimídia
 
@@ -83,7 +78,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y lame libavcodec-extra ffmpeg
 ```
 
-### Aplicações Úteis
+### Diversos
 
 ```bash
 sudo apt install -y vlc gimp inkscape gnome-tweaks dconf-editor htop gparted neofetch simplescreenrecorder transmission-gtk gpick papirus-icon-theme
@@ -110,7 +105,13 @@ sudo apt install -y vlc gimp inkscape gnome-tweaks dconf-editor htop gparted neo
 
 ### Google Chrome
 
-💡 **info:** O comando abaixo adiciona a chave pública, adiciona o repositório e instala o pacote.
+Método 1: **Flatpak**
+
+```bash
+flatpak install flathub com.google.Chrome
+```
+
+Método 2: **Repositório**
 
 ```bash
 curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list && sudo apt update && sudo apt install -y google-chrome-stable
@@ -118,15 +119,13 @@ curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmo
 
 ### Brave
 
-##### Método 1: _Flatpak_
+Método 1: **Flatpak**
 
 ```bash
 flatpak install flathub com.brave.Browser
 ```
 
-##### Método 2: _Repositório_
-
-💡 **info:** O comando abaixo adiciona a chave pública, adiciona o repositório e instala o pacote.
+Método 2: **Repositório**
 
 ```bash
 curl -fsSL https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/brave-browser-archive-keyring.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge-dev.list > /dev/null && sudo apt update && sudo apt install -y microsoft-edge-stable
@@ -134,15 +133,13 @@ curl -fsSL https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-
 
 ### Spotify
 
-##### Método 1: _Flatpak_
+Método 1: **Flatpak**
 
 ```bash
 flatpak install -y flathub com.spotify.Client
 ```
 
-##### Método 2: _Repositório_
-
-💡 **info:** O comando abaixo adiciona a chave pública, adiciona o repositório e instala o pacote.
+Método 2: **Repositório**
 
 ```bash
 curl -fsSL https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo gpg --dearmor -o /usr/share/keyrings/spotify.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/spotify.gpg] http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt update && sudo apt install -y spotify-client
@@ -150,15 +147,13 @@ curl -fsSL https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sud
 
 ### Microsoft Edge
 
-##### Método 1: _Flatpak_
+Método 1: **Flatpak**
 
 ```bash
 flatpak install -y flathub com.microsoft.Edge
 ```
 
-##### Método 2: _Repositório_
-
-💡 **info:** O comando abaixo adiciona a chave pública, adiciona o repositório e instala o pacote.
+Método 2: **Repositório**
 
 ```bash
 curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list > /dev/null && sudo apt update && sudo apt install -y brave-browser
@@ -174,38 +169,36 @@ Versão **Flatpak**:
 flatpak install -y flathub com.microsoft.Teams
 ```
 
-<span id="restaurando-backup"></span>
+<span id="term"></span>
 
-## 💾 Restaurando backup
-
-> **🚧 EM BREVE 🚧**
-
-<span id="terminal"></span>
-
-## ⬛ Terminal
+## Terminal
 
 ### Zsh
+
+[![Repo-zsh](https://img.shields.io/badge/-Github-161b22?logo=github&style=flat)](https://github.com/zsh-users/zsh)
 
 ```bash
 sudo apt install -y zsh
 ```
 
-Alterando o shell padrão
+Altere o shell padrão
 
 ```bash
-sudo usermod --shell $(which zsh) $USER
+chsh -s $(which zsh)
 ```
 
 ### Oh My Zsh
 
+[![Repo-oh-my-zsh](https://img.shields.io/badge/-Github-161b22?logo=github&style=flat)](https://github.com/ohmyzsh/ohmyzsh)
+
 ```bash
-curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh; zsh
+curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh; zsh
 ```
 
 #### Plugins
 
-- zsh-syntax-highlighting
-- zsh-autosuggestions
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 
 ```bash
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -221,11 +214,15 @@ sed -i -e "$(grep -n 'plugins=(git)' ~/.zshrc | cut -f1 -d:)s/plugins=(git)/plug
 
 ### fzf
 
+[![Repo-fzf](https://img.shields.io/badge/-Github-161b22?logo=github&style=flat)](https://github.com/junegunn/fzf)
+
 ```bash
 sudo apt install -y fzf
 ```
 
 ### Starship prompt
+
+[![Repo-starship](https://img.shields.io/badge/-Github-161b22?logo=github&style=flat)](https://github.com/starship/starship) [![Docs-starship](https://img.shields.io/badge/-docs-dd0b78?style=flat)](https://starship.rs/guide/)
 
 ```bash
 curl -sS https://starship.rs/install.sh | sh
@@ -237,9 +234,9 @@ Adicione o Starship ao arquivo `~/.zshrc`
 echo -e '# Starship prompt\neval "$(starship init zsh)"' >> ~/.zshrc
 ```
 
-<span id="preparado-pra-codar"></span>
+<span id="ambiente-dev"></span>
 
-## 👨‍💻 Preparado pra Codar?
+## Ambiente Dev
 
 ### Visual Studio Code
 
@@ -249,14 +246,45 @@ sudo apt install -y code
 
 ### asdf-vm
 
+[![Repo-asdf-vm](https://img.shields.io/badge/-Github-161b22?logo=github&style=flat)](https://github.com/asdf-vm/asdf) [![Docs-asdf-vm](https://img.shields.io/badge/-docs-b744b8?style=flat)](https://asdf-vm.com/guide/getting-started.html)
+
+O asdf-vm é uma ferramenta de linha de comando para gerenciar multiplas versões de ferramentas/runtimes, similar ao `nvm` para Node.js, `sdkman` para Java, `rbenv` para Ruby, entre outros. Uma das vantagens do asdf é o seu sistema de plugins que elimina a necessidade de ter um gerenciador para cada ferramenta/runtime, facilitando a configuração do ambiente e melhorando a produtividade.
+
+Você pode baixar o asdf-vm direto do repositório oficial:
+
 ```bash
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf
 ```
 
-Adicione a linha abaixo ao arquivo `~/.zshrc`
+<details><summary><b>Bash</b></summary>
+
+Adicione o asdf ao arquivo `~/.bashrc`
 
 ```bash
+echo -e '\n# asdf\n. $HOME/.asdf/asdf.sh\n# asdf completions\n. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
+```
+
+Recarregue as configurações do bash
+
+```bash
+source ~/.bashrc
+```
+
+</details>
+
+<details><summary><b>Zsh</b></summary>
+
+Adicione o asdf ao arquivo `~/.zshrc`
+
+```
+# asdf
 . $HOME/.asdf/asdf.sh
+
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
 ```
 
 Recarregue as configurações do zsh
@@ -265,43 +293,49 @@ Recarregue as configurações do zsh
 source ~/.zshrc
 ```
 
-Exemplo adicionando plugin Nodejs:
+</details>
+
+Adicionando o plugin do Java:
+
+```bash
+asdf plugin add java https://github.com/halcyon/asdf-java.git
+```
+
+Adicionando o plugin do Maven:
+
+```bash
+asdf plugin add maven https://github.com/halcyon/asdf-maven.git
+```
+
+Adicionando o plugin do Nodejs:
 
 ```bash
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 ```
 
-Exemplo instalando versão lts do Nodejs:
+Para outros plugins e como utilizá-los acesse [asdf-plugins.](https://github.com/asdf-vm/asdf-plugins)
+
+### Docker CLI
+
+[![Docs-docker](https://img.shields.io/badge/-docs-2496ED?style=flat)](https://docs.docker.com/get-started/)
+
+Pré-requisitos:
 
 ```bash
-asdf install nodejs lts
+sudo apt install -y ca-certificates gnupg curl lsb-release
 ```
 
-### Docker
-
-Pré-requisitos
-
-```bash
-sudo apt install -y ca-certificates gnupg curl lsb-realease
-```
-
-💡 **info:** O comando abaixo adiciona a chave pública, adiciona o repositório e instala os pacotes.
+Instale com o comando abaixo:
 
 ```bash
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list && sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-<span id="chaves-ssh"></span>
-
-## 🔑 Chaves de cadeia SSH
-
-> **🚧 EM BREVE 🚧**
-
 <span id="jogos"></span>
 
-## 🎮 Jogatinas
+## Jogos
 
-⚠️ **ALERTA!** Certifique-se de ter [habilitado a arquitetura i386](#habilitando-arquitetura-i386) antes de proceguir!
+⚠️ **ALERTA!** Certifique-se de ter [habilitado a arquitetura i386](#habilitando-arquitetura-i386) antes de prosseguir!
 
 ### Dependências Wine
 
@@ -323,9 +357,9 @@ sudo apt install -y lutris
 
 ### League of Legends
 
-📥 Instale o jogo através do [script Lutris][lutris-lol]
+Instale o jogo através desse [script](https://lutris.net/games/league-of-legends/)
 
-[📺 Vídeo de referência para instalação](https://www.youtube.com/watch?v=voVvLfS3rw8&t=176s)
+[![LoL-video-instalacao](https://img.shields.io/badge/-Vídeo_de_instalação-FF0000?&logo=youtube&style=flat)](https://www.youtube.com/watch?v=voVvLfS3rw8&t=176s)
 
 Execute o comando abaixo para resolver o erro de inicialização do jogo
 
@@ -345,13 +379,3 @@ sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.
 ---
 
 **&copy; 2022 Stenio Silveira**
-
-<!-- links -->
-
-[ohmyzsh]: https://github.com/ohmyzsh/ohmyzsh
-[fzf]: https://github.com/junegunn/fzf
-[starship]: https://starship.rs/guide/
-[asdfvm]: https://asdf-vm.com/guide/getting-started.html#_1-install-dependencies
-[docker]: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
-[lutriswinedependencies]: https://github.com/lutris/docs/blob/master/WineDependencies.md#ubuntudebianubuntu-derivativesdebian-derivatives
-[lutris-lol]: https://lutris.net/games/league-of-legends/
