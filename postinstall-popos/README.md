@@ -8,8 +8,8 @@
   - [Habilitando arquitetura i386](#habilitando-arquitetura-i386)
   - [Atualizando o sistema](#atualizando-o-sistema)
 - [Aplicações](#aplicacoes)
-  - [Codecs multimídia](#codecs)
-  - [Diversos](#diversos)
+  - [Codecs multimídia](#codecs-multimídia)
+  - [Úteis](#úteis)
   - [Google Chrome](#google-chrome)
   - [Brave](#brave)
   - [Spotify](#spotify)
@@ -18,23 +18,19 @@
 - [Terminal](#term)
   - [Zsh](#zsh)
   - [Oh My Zsh](#oh-my-zsh)
-  - [Plugins](#zsh-plugins)
+  - [Plugins](#plugins)
   - [fzf](#fzf)
-  - [Starship prompt](#starship)
+  - [Starship prompt](#starship-prompt)
 - [Ambiente Dev](#ambiente-dev)
   - [Visual Studio Code](#visual-studio-code)
-  - [asdf-vm](#asdf)
-  - [Docker](#docker)
-- [Chaves SSH](#chaves-ssh)
+  - [asdf-vm](#asdf-vm)
+  - [Docker CLI](#docker-cli)
 - [Jogos](#jogos)
   - [Dependências Wine](#dependências-wine)
   - [Steam](#steam)
   - [Lutris](#lutris)
   - [League of Legends](#league-of-legends)
-- [Extras](#✨-extras)
-  - [Alternando perfil gráfico pelo terminal](#graphics-profile)
-  - [Obtendo temas](#get-themes)
-- [Referências](#🔖-referências)
+- [Extras](#extras)
 
 </details>
 
@@ -78,7 +74,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y lame libavcodec-extra ffmpeg
 ```
 
-### Diversos
+### Úteis
 
 ```bash
 sudo apt install -y vlc gimp inkscape gnome-tweaks dconf-editor htop gparted neofetch simplescreenrecorder transmission-gtk gpick papirus-icon-theme
@@ -371,7 +367,7 @@ sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.
 
 > **Jogo > Gráficos > Optar pelo modo legado DX9**
 
-## ✨ Extras
+## Extras
 
 - [Alterando o Visual](#)
 - [Dicas para o Pop!\_OS](#)
