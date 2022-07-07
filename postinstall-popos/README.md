@@ -157,10 +157,16 @@ curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmo
 
 💡 **dica:** Eu prefiro a versão web do Teams, é mais atualizado e com menos bugs que a versão desktop para linux.
 
-Versão **Flatpak**:
+Método 1: **Flatpak**
 
 ```bash
 flatpak install flathub com.microsoft.Teams -y
+```
+
+Método 2: **Repositório**
+
+```bash
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/ms-teams stable main" | sudo tee /etc/apt/sources.list.d/ms-teams.list > /dev/null && sudo apt update && sudo apt install teams -y
 ```
 
 <span id="term"></span>
