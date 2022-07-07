@@ -233,7 +233,7 @@ curl -sS https://starship.rs/install.sh | sh
 Adicione o Starship ao arquivo `~/.zshrc`
 
 ```bash
-echo -e '# Starship prompt\neval "$(starship init zsh)"' >> ~/.zshrc
+echo -e '\n# Starship prompt\neval "$(starship init zsh)"' >> ~/.zshrc
 ```
 
 <span id="ambiente-dev"></span>
