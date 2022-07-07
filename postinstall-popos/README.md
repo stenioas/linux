@@ -80,20 +80,20 @@ sudo apt install vlc gimp inkscape gnome-tweaks dconf-editor htop gparted neofet
 
 <details><summary>💡 informações sobre os pacotes</summary>
 
-| PACOTE               | DESCRIÇÃO                                 |
-| :------------------- | :---------------------------------------- |
-| vlc                  | Player de mídia                           |
-| gimp                 | Programa de manipulação de imagens da GNU |
-| inkscape             | Programa de desenho vetorial              |
-| gnome-tweaks         | Configurações avançadas do GNOME          |
-| dconf-editor         | Editor de configurações do GNOME          |
-| htop                 | Monitor de recursos do sistema            |
-| gparted              | Utilitário para gerenciar partições       |
-| neofetch             | Utilitário de informações do sistema      |
-| simplescreenrecorder | Gravador de tela                          |
-| transmission-gtk     | Gerenciador de arquivos .torrent          |
-| gpick                | Color picker                              |
-| papirus-icon-theme   | Tema de ícones                            |
+| PACOTE               | DESCRIÇÃO                            |
+| :------------------- | :----------------------------------- |
+| vlc                  | Player de mídia                      |
+| gimp                 | Manipulação de imagens               |
+| inkscape             | Desenho vetorial                     |
+| gnome-tweaks         | Configurações do GNOME               |
+| dconf-editor         | Editor de configurações do GNOME     |
+| htop                 | Monitor de recursos do sistema       |
+| gparted              | Utilitário para gerenciar partições  |
+| neofetch             | Utilitário de informações do sistema |
+| simplescreenrecorder | Gravador de tela                     |
+| transmission-gtk     | Gerenciador de arquivos .torrent     |
+| gpick                | Color picker                         |
+| papirus-icon-theme   | Tema de ícones                       |
 
 </details>
 
@@ -122,7 +122,7 @@ flatpak install flathub com.brave.Browser -y
 Método 2: **Repositório**
 
 ```bash
-curl -fsSL https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/brave-browser-archive-keyring.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge-dev.list > /dev/null && sudo apt update && sudo apt install microsoft-edge-stable -y
+curl -fsSL https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/brave-browser-archive-keyring.gpg && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list > /dev/null && sudo apt update && sudo apt install brave-browser -y
 ```
 
 ### Spotify
