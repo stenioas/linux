@@ -69,13 +69,13 @@ reboot
 ### Codecs multimídia
 
 ```bash
-sudo apt install -y lame libavcodec-extra ffmpeg
+sudo apt install lame libavcodec-extra ffmpeg -y
 ```
 
 ### Úteis
 
 ```bash
-sudo apt install -y vlc gimp inkscape gnome-tweaks dconf-editor htop gparted neofetch simplescreenrecorder transmission-gtk gpick papirus-icon-theme
+sudo apt install vlc gimp inkscape gnome-tweaks dconf-editor htop gparted neofetch simplescreenrecorder transmission-gtk gpick papirus-icon-theme -y
 ```
 
 <details><summary>💡 informações sobre os pacotes</summary>
@@ -102,13 +102,13 @@ sudo apt install -y vlc gimp inkscape gnome-tweaks dconf-editor htop gparted neo
 Método 1: **Flatpak**
 
 ```bash
-flatpak install flathub com.google.Chrome
+flatpak install flathub com.google.Chrome -y
 ```
 
 Método 2: **Repositório**
 
 ```bash
-curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list && sudo apt update && sudo apt install -y google-chrome-stable
+curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list && sudo apt update && sudo apt install google-chrome-stable -y
 ```
 
 ### Brave
@@ -116,13 +116,13 @@ curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmo
 Método 1: **Flatpak**
 
 ```bash
-flatpak install flathub com.brave.Browser
+flatpak install flathub com.brave.Browser -y
 ```
 
 Método 2: **Repositório**
 
 ```bash
-curl -fsSL https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/brave-browser-archive-keyring.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge-dev.list > /dev/null && sudo apt update && sudo apt install -y microsoft-edge-stable
+curl -fsSL https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/brave-browser-archive-keyring.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge-dev.list > /dev/null && sudo apt update && sudo apt install microsoft-edge-stable -y
 ```
 
 ### Spotify
@@ -130,13 +130,13 @@ curl -fsSL https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-
 Método 1: **Flatpak**
 
 ```bash
-flatpak install -y flathub com.spotify.Client
+flatpak install flathub com.spotify.Client -y
 ```
 
 Método 2: **Repositório**
 
 ```bash
-curl -fsSL https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo gpg --dearmor -o /usr/share/keyrings/spotify.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/spotify.gpg] http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt update && sudo apt install -y spotify-client
+curl -fsSL https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo gpg --dearmor -o /usr/share/keyrings/spotify.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/spotify.gpg] http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt update && sudo apt install spotify-client -y
 ```
 
 ### Microsoft Edge
@@ -144,13 +144,13 @@ curl -fsSL https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sud
 Método 1: **Flatpak**
 
 ```bash
-flatpak install -y flathub com.microsoft.Edge
+flatpak install flathub com.microsoft.Edge -y
 ```
 
 Método 2: **Repositório**
 
 ```bash
-curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list > /dev/null && sudo apt update && sudo apt install -y brave-browser
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list > /dev/null && sudo apt update && sudo apt install brave-browser -y
 ```
 
 ### Microsoft Teams
@@ -160,7 +160,7 @@ curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmo
 Versão **Flatpak**:
 
 ```bash
-flatpak install -y flathub com.microsoft.Teams
+flatpak install flathub com.microsoft.Teams -y
 ```
 
 <span id="term"></span>
@@ -172,7 +172,7 @@ flatpak install -y flathub com.microsoft.Teams
 [![Repo-zsh](https://img.shields.io/badge/-Github-161b22?logo=github&style=flat)](https://github.com/zsh-users/zsh)
 
 ```bash
-sudo apt install -y zsh
+sudo apt install zsh -y
 ```
 
 Altere o shell padrão
@@ -211,7 +211,7 @@ sed -i -e "$(grep -n 'plugins=(git)' ~/.zshrc | cut -f1 -d:)s/plugins=(git)/plug
 [![Repo-fzf](https://img.shields.io/badge/-Github-161b22?logo=github&style=flat)](https://github.com/junegunn/fzf)
 
 ```bash
-sudo apt install -y fzf
+sudo apt install fzf -y
 ```
 
 ### Starship prompt
@@ -235,7 +235,7 @@ echo -e '# Starship prompt\neval "$(starship init zsh)"' >> ~/.zshrc
 ### Visual Studio Code
 
 ```bash
-sudo apt install -y code
+sudo apt install code -y
 ```
 
 ### asdf-vm
@@ -316,13 +316,13 @@ Para outros plugins e como utilizá-los acesse [asdf-plugins.](https://github.co
 Pré-requisitos:
 
 ```bash
-sudo apt install -y ca-certificates gnupg curl lsb-release
+sudo apt install ca-certificates gnupg curl lsb-release -y
 ```
 
 Instale com o comando abaixo:
 
 ```bash
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list && sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list && sudo apt update && sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 ```
 
 <span id="jogos"></span>
@@ -332,19 +332,19 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 ### Dependências Wine
 
 ```bash
-sudo apt install -y wine64 wine32 libasound2-plugins:i386 libsdl2-2.0-0:i386 libdbus-1-3:i386 libsqlite3-0:i386
+sudo apt install wine64 wine32 libasound2-plugins:i386 libsdl2-2.0-0:i386 libdbus-1-3:i386 libsqlite3-0:i386 -y
 ```
 
 ### Steam
 
 ```bash
-sudo apt install -y steam-installer
+sudo apt install steam-installer -y
 ```
 
 ### Lutris
 
 ```bash
-sudo apt install -y lutris
+sudo apt install lutris -y
 ```
 
 ### League of Legends
