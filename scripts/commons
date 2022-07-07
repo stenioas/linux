@@ -64,12 +64,12 @@ _print_line() {
 
 _print_ok() {
   tput rc
-  echo -e "${BCYAN}[${BGREEN} OK ${BCYAN}]${RESET}"
+  echo -e "${BCYAN}[${BGREEN} ✔ OK ${BCYAN}]${RESET}"
 }
 
 _print_error() {
   tput rc
-  echo -e "${BCYAN}[${BRED}ERRO${BCYAN}]${RESET}"
+  echo -e "${BCYAN}[${BRED} ✗ ERRO${BCYAN}]${RESET}"
 }
 
 _print_msg() {

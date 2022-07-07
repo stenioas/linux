@@ -5,8 +5,8 @@
 - [Info](#info)
 - [Começando](#comecando)
   - [Alterando o nome da máquina](#alterando-o-nome-da-máquina)
-  - [Habilitando arquitetura i386](#habilitando-arquitetura-i386)
   - [Atualizando o sistema](#atualizando-o-sistema)
+  - [Reinicie!](#reinicie)
 - [Aplicações](#aplicacoes)
   - [Codecs multimídia](#codecs-multimídia)
   - [Úteis](#úteis)
@@ -50,18 +50,16 @@
 hostnamectl set-hostname "nome_da_maquina"
 ```
 
-### Habilitando arquitetura i386
-
-💡 **info:** Aplicações 32 bits necessitam dessa arquitetura habilitada para funcionar.
-
-```bash
-sudo dpkg --add-architecture i386
-```
-
 ### Atualizando o sistema
 
 ```bash
 sudo apt update && sudo apt upgrade -y
+```
+
+### Reinicie!
+
+```bash
+reboot
 ```
 
 <span id="aplicacoes"></span>
@@ -330,8 +328,6 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 <span id="jogos"></span>
 
 ## Jogos
-
-⚠️ **ALERTA!** Certifique-se de ter [habilitado a arquitetura i386](#habilitando-arquitetura-i386) antes de prosseguir!
 
 ### Dependências Wine
 
