@@ -69,7 +69,7 @@ reboot
 
 ### Utilitários
 
-💡 **info:** Alguns pacotes e aplicações que considero essenciais, como codecs, player multimídia, editor de imagens, gravador de tela, editor de desenho vetorial, tema de ícones, ajustes do Gnome, dentro outros.
+💡 **info:** Alguns pacotes e aplicações que considero essenciais, como codecs, player multimídia, editor de imagens, gravador de tela, editor de desenho vetorial, tema de ícones, ajustes do Gnome, dentre outros.
 
 ```bash
 sudo apt install lame libavcodec-extra vlc gimp inkscape simplescreenrecorder transmission-gtk papirus-icon-theme gnome-tweaks dconf-editor htop gparted neofetch gpick -y
