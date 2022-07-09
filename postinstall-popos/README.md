@@ -1,101 +1,81 @@
-# Guia de pós-instalação Pop!\_OS 22.04 LTS
+# Pop!\_OS 22.04 - Guia de pós-instalação
 
-<details><summary>Tabela de conteúdos</summary>
+Apenas um passo a passo que sigo logo após instalar o sistema.
 
-- [Info](#info)
-- [Começando](#comecando)
-  - [Alterando o nome da máquina](#alterando-o-nome-da-máquina)
-  - [Atualizando o sistema](#atualizando-o-sistema)
-  - [Reinicie!](#reinicie)
-- [Aplicações](#aplicacoes)
-  - [Codecs multimídia](#codecs-multimídia)
-  - [Úteis](#úteis)
-  - [Google Chrome](#google-chrome)
-  - [Brave](#brave)
-  - [Spotify](#spotify)
-  - [Microsoft Edge](#microsoft-edge)
-  - [Microsoft Teams](#microsoft-teams)
+<details><summary>Tabela de conteúdos</summary><br/>
+
+- [Iniciando](#begining)
+  - [Defina o nome da máquina](#set-hostname)
+  - [Atualize o sistema](#install-updates)
+- [Apps](#apps)
+  - [Utilitários](#app-utilities)
+  - [Google Chrome](#app-chrome)
+  - [Brave](#app-brave)
+  - [Spotify](#app-spotify)
+  - [Microsoft Edge](#app-edge)
+  - [Microsoft Teams](#app-teams)
 - [Terminal](#term)
-  - [Zsh](#zsh)
-  - [Oh My Zsh](#oh-my-zsh)
-  - [Plugins](#plugins)
-  - [fzf](#fzf)
-  - [Starship prompt](#starship-prompt)
+  - [Zsh](#term-zsh)
+  - [Oh My Zsh](#term-ohmyzsh)
+  - [Plugins](#term-plugins)
+  - [fzf](#term-fzf)
+  - [Starship prompt](#term-starship)
 - [Ambiente Dev](#ambiente-dev)
-  - [Visual Studio Code](#visual-studio-code)
-  - [asdf-vm](#asdf-vm)
-  - [Docker CLI](#docker-cli)
+  - [Visual Studio Code](#dev-code)
+  - [asdf-vm](#dev-asdf)
+  - [Docker CLI](#dev-docker)
+  - [Insomnia](#dev-insomnia)
+  - [Dbeaver](#dev-dbeaver)
+  - [Chave SSH](#dev-sshkey)
 - [Jogos](#jogos)
-  - [Dependências Wine](#dependências-wine)
-  - [Steam](#steam)
-  - [Lutris](#lutris)
-  - [League of Legends](#league-of-legends)
+  - [Dependências](#games-dependencies)
+  - [Steam e Lutris](#games-steam-lutris)
+  - [League of Legends](#games-lol)
 - [Extras](#extras)
 
 </details>
 
-<span id="info"></span>
+<span id="begining"></span>
 
-## Info
+## 👋 Iniciando
 
-💡 A maioria das aplicações descritas neste guia podems ser encontradas diretamente na **Pop!\_Shop**, a loja de aplicativos do próprio sistema.
+<span id="set-hostname"></span>
 
-<span id="comecando"></span>
-
-## Começando
-
-### Alterando o nome da máquina
+### Defina o nome da máquina
 
 ```bash
-hostnamectl set-hostname "nome_da_maquina"
+hostnamectl set-hostname "nome_da_sua_maquina"
 ```
 
-### Atualizando o sistema
+<span id="install-updates"></span>
+
+### Atualize o sistema
 
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
 
-### Reinicie!
+Reinicie a máquina após concluir as atualizações!
 
 ```bash
 reboot
 ```
 
-<span id="aplicacoes"></span>
+<span id="apps"></span>
 
-## Aplicações
+## 📦 Apps
 
-### Codecs multimídia
+<span id="app-utilities"></span>
 
-```bash
-sudo apt install lame libavcodec-extra ffmpeg -y
-```
+### Utilitários
 
-### Úteis
+💡 **info:** Alguns pacotes e aplicações que considero essenciais, como codecs, player multimídia, editor de imagens, gravador de tela, editor de desenho vetorial, tema de ícones, ajustes do Gnome, dentro outros.
 
 ```bash
-sudo apt install vlc gimp inkscape gnome-tweaks dconf-editor htop gparted neofetch simplescreenrecorder transmission-gtk gpick papirus-icon-theme -y
+sudo apt install lame libavcodec-extra vlc gimp inkscape simplescreenrecorder transmission-gtk papirus-icon-theme gnome-tweaks dconf-editor htop gparted neofetch gpick -y
 ```
 
-<details><summary>💡 informações sobre os pacotes</summary>
-
-| PACOTE               | DESCRIÇÃO                            |
-| :------------------- | :----------------------------------- |
-| vlc                  | Player de mídia                      |
-| gimp                 | Manipulação de imagens               |
-| inkscape             | Desenho vetorial                     |
-| gnome-tweaks         | Configurações do GNOME               |
-| dconf-editor         | Editor de configurações do GNOME     |
-| htop                 | Monitor de recursos do sistema       |
-| gparted              | Utilitário para gerenciar partições  |
-| neofetch             | Utilitário de informações do sistema |
-| simplescreenrecorder | Gravador de tela                     |
-| transmission-gtk     | Gerenciador de arquivos .torrent     |
-| gpick                | Color picker                         |
-| papirus-icon-theme   | Tema de ícones                       |
-
-</details>
+<span id="app-chrome"></span>
 
 ### Google Chrome
 
@@ -111,6 +91,8 @@ Método 2: **Repositório**
 curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list && sudo apt update && sudo apt install google-chrome-stable -y
 ```
 
+<span id="app-brave"></span>
+
 ### Brave
 
 Método 1: **Flatpak**
@@ -124,6 +106,8 @@ Método 2: **Repositório**
 ```bash
 curl -fsSL https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/brave-browser-archive-keyring.gpg && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list > /dev/null && sudo apt update && sudo apt install brave-browser -y
 ```
+
+<span id="app-spotify"></span>
 
 ### Spotify
 
@@ -139,6 +123,8 @@ Método 2: **Repositório**
 curl -fsSL https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo gpg --dearmor -o /usr/share/keyrings/spotify.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/spotify.gpg] http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt update && sudo apt install spotify-client -y
 ```
 
+<span id="app-edge"></span>
+
 ### Microsoft Edge
 
 Método 1: **Flatpak**
@@ -153,9 +139,11 @@ Método 2: **Repositório**
 curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge-dev.list > /dev/null && sudo apt update && sudo apt install microsoft-edge-stable -y
 ```
 
+<span id="app-teams"></span>
+
 ### Microsoft Teams
 
-💡 **dica:** Eu prefiro a versão web do Teams, é mais atualizado e com menos bugs que a versão desktop para linux.
+💡 **dica:** Eu prefiro a versão web do Teams, é mais atualizado e com menos bugs que a versão desktop.
 
 Método 1: **Flatpak**
 
@@ -173,7 +161,9 @@ curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmo
 
 <span id="term"></span>
 
-## Terminal
+## 🔳 Terminal
+
+<span id="term-zsh"></span>
 
 ### Zsh
 
@@ -189,6 +179,8 @@ Altere o shell padrão
 chsh -s $(which zsh)
 ```
 
+<span id="term-ohmyzsh"></span>
+
 ### Oh My Zsh
 
 [![Repo-oh-my-zsh](https://img.shields.io/badge/-Github-161b22?logo=github&style=flat)](https://github.com/ohmyzsh/ohmyzsh)
@@ -196,6 +188,8 @@ chsh -s $(which zsh)
 ```bash
 curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh; zsh
 ```
+
+<span id="term-plugins"></span>
 
 #### Plugins
 
@@ -214,6 +208,8 @@ sed -i -e "$(grep -n 'plugins=(git)' ~/.zshrc | cut -f1 -d:)s/plugins=(git)/plug
 
 💡 **dica:** Reinicie a sessão para que as alterações surtam efeito.
 
+<span id="term-fzf"></span>
+
 ### fzf
 
 [![Repo-fzf](https://img.shields.io/badge/-Github-161b22?logo=github&style=flat)](https://github.com/junegunn/fzf)
@@ -221,6 +217,8 @@ sed -i -e "$(grep -n 'plugins=(git)' ~/.zshrc | cut -f1 -d:)s/plugins=(git)/plug
 ```bash
 sudo apt install fzf -y
 ```
+
+<span id="term-starship"></span>
 
 ### Starship prompt
 
@@ -238,13 +236,17 @@ echo -e '\n# Starship prompt\neval "$(starship init zsh)"' >> ~/.zshrc
 
 <span id="ambiente-dev"></span>
 
-## Ambiente Dev
+## 👨‍💻 Ambiente Dev
+
+<span id="dev-code"></span>
 
 ### Visual Studio Code
 
 ```bash
 sudo apt install code -y
 ```
+
+<span id="dev-asdf"></span>
 
 ### asdf-vm
 
@@ -258,7 +260,7 @@ Você pode baixar o asdf-vm direto do repositório oficial:
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf
 ```
 
-<details><summary><b>Bash</b></summary>
+<details><summary><b>Bash</b></summary><br/>
 
 Adicione o asdf ao arquivo `~/.bashrc`
 
@@ -274,19 +276,12 @@ source ~/.bashrc
 
 </details>
 
-<details><summary><b>Zsh</b></summary>
+<details><summary><b>Zsh</b></summary><br/>
 
 Adicione o asdf ao arquivo `~/.zshrc`
 
-```
-# asdf
-. $HOME/.asdf/asdf.sh
-
-# append completions to fpath
-fpath=(${ASDF_DIR}/completions $fpath)
-
-# initialise completions with ZSH's compinit
-autoload -Uz compinit && compinit
+```bash
+echo -e '\n# asdf\n. $HOME/.asdf/asdf.sh\n# append completions to fpath\nfpath=(${ASDF_DIR}/completions $fpath)\n# initialise completions with ZSHs compinit\nautoload -Uz compinit && compinit' >> ~/.zshrc
 ```
 
 Recarregue as configurações do zsh
@@ -317,6 +312,8 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 
 Para outros plugins e como utilizá-los acesse [asdf-plugins.](https://github.com/asdf-vm/asdf-plugins)
 
+<span id="dev-docker"></span>
+
 ### Docker CLI
 
 [![Docs-docker](https://img.shields.io/badge/-docs-2496ED?style=flat)](https://docs.docker.com/get-started/)
@@ -333,27 +330,139 @@ Instale com o comando abaixo:
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list && sudo apt update && sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 ```
 
+<span id="dev-insomnia"></span>
+
+### Insomnia
+
+Método 1: **Flatpak**
+
+```bash
+flatpak install -y flathub rest.insomnia.Insomnia
+```
+
+Método 2: **Repositório**
+
+```bash
+echo "deb [trusted=yes arch=amd64] https://download.konghq.com/insomnia-ubuntu/ default all" | sudo tee -a /etc/apt/sources.list.d/insomnia.list && sudo apt update && sudo apt install -y insomnia
+```
+
+<span id="dev-dbeaver"></span>
+
+### Dbeaver
+
+Método 1: **Flatpak**
+
+```bash
+flatpak install -y flathub io.dbeaver.DBeaverCommunity
+```
+
+Método 2: **Download .deb**
+
+```bash
+wget -c -O ~/Downloads/dbeaver-ce_latest_amd64.deb "https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb" && sudo apt install -y ~/Downloads/dbeaver-ce_latest_amd64.deb
+```
+
+<span id="dev-sshkey"></span>
+
+### Chave SSH
+
+Verifique se já existe alguma chave:
+
+```bash
+ls -la ~/.ssh
+```
+
+Crie uma nova chave SSH:
+
+```bash
+ssh-keygen -t ed25519 -C "seu_email@exemplo.com.br"
+```
+
+Quando aparecer a solicitação "Enter a file in which to save the key", não digite nada e pressiona `Enter`, o nome e local padrão para arquivo serão aceitos.
+
+```
+> Generating public/private ed25519 key pair.
+> Enter a file in which to save the key (/home/seu_usuario/.ssh/id_ed25519): [Pressione Enter]
+```
+
+Digite uma senha segura no prompt:
+
+```
+> Enter passphrase (empty for no passphrase): [Digite uma senha]
+> Enter same passphrase again: [Redigite a senha]
+```
+
+Adicione a chave SSH criada ao ssh-agent:
+
+```bash
+ssh-add ~/.ssh/id_ed25519
+```
+
+Copie a chave pública para sua área de transferência:
+
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
+Ou use o gedit se achar conveniente:
+
+```bash
+gedit ~/.ssh/id_ed25519.pub
+```
+
+Adicione a chave a sua conta do Github:
+
+1. Selecione seu `avatar` no canto superior direito
+2. Selecione `Settings`
+3. Na barra lateral esquerda selecione `SSH and GPG Keys`
+4. Clique no botão `New SSH key`
+5. Dê um nome para a chave no campo `Title`
+6. Cole a chave copiada anteriormente na caixa de texto com o título `Key`
+7. Confirme clicando no botão `Add SSH key`
+
+Verifique a conexão:
+
+```bash
+ssh -T git@github.com
+```
+
+Se for a primeira vez que você se conecta, deve autenticar o host. Se vir uma mensagem como essa:
+
+```
+> The authenticity of host 'github.com (IP ADDRESS)' can't be established.
+> RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+> Are you sure you want to continue connecting (yes/no)?
+```
+
+Digite `yes` e tecle Enter.
+
+Verifique a conexão novamente:
+
+```bash
+ssh -T git@github.com
+```
+
 <span id="jogos"></span>
 
-## Jogos
+## 👾 Jogos
 
-### Dependências Wine
+<span id="games-dependencies"></span>
+
+### Dependências
 
 ```bash
 sudo apt install wine64 wine32 libasound2-plugins:i386 libsdl2-2.0-0:i386 libdbus-1-3:i386 libsqlite3-0:i386 -y
 ```
 
-### Steam
+<span id="games-steam-lutris"></span>
+
+### Steam e Lutris
 
 ```bash
-sudo apt install steam-installer -y
+sudo apt install steam-installer lutris -y
 ```
 
-### Lutris
-
-```bash
-sudo apt install lutris -y
-```
+<span id="games-lol"></span>
 
 ### League of Legends
 
@@ -371,7 +480,9 @@ sudo sysctl -w "abi.vsyscall32=0" && sudo sh -c 'echo "# League of Legends\nabi.
 
 > **Jogo > Gráficos > Optar pelo modo legado DX9**
 
-## Extras
+<span id="extras"></span>
+
+## 🎀 Extras
 
 - [Alterando o Visual](#)
 - [Dicas para o Pop!\_OS](#)
