@@ -394,8 +394,7 @@ Wallpapers
 ```bash
 git clone https://github.com/AngelJumbo/gruvbox-wallpapers.git ~/Downloads/tmp/gruvbox-wallpapers/ && \
 cd ~/Downloads/tmp/gruvbox-wallpapers/ && \
-mkdir -p ~/.local/share/wallpapers && \
-cp -r wallpapers/* ~/.local/share/wallpapers/
+cp -r wallpapers/* ~/.local/share/backgrounds/
 ```
 
 ### Papirus folders
