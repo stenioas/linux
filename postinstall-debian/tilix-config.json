@@ -1,0 +1,67 @@
+{
+    "child": {
+        "child1": {
+            "directory": "\/home\/stenioas",
+            "height": 1354,
+            "profile": "2b7c4080-0ddd-46c5-8f23-563fd3ba789d",
+            "readOnly": false,
+            "synchronizedInput": true,
+            "type": "Terminal",
+            "uuid": "c4ae94d4-897c-4482-a3f0-92f64801f811",
+            "width": 1272
+        },
+        "child2": {
+            "child1": {
+                "directory": "\/home\/stenioas",
+                "height": 677,
+                "profile": "2b7c4080-0ddd-46c5-8f23-563fd3ba789d",
+                "readOnly": false,
+                "synchronizedInput": true,
+                "type": "Terminal",
+                "uuid": "8f055b38-281b-49da-be19-44a0c66032fe",
+                "width": 1266
+            },
+            "child2": {
+                "child1": {
+                    "directory": "\/home\/stenioas",
+                    "height": 335,
+                    "profile": "2b7c4080-0ddd-46c5-8f23-563fd3ba789d",
+                    "readOnly": false,
+                    "synchronizedInput": true,
+                    "type": "Terminal",
+                    "uuid": "b50bfd40-0fb3-40ad-a292-23ef20234023",
+                    "width": 1266
+                },
+                "child2": {
+                    "directory": "\/home\/stenioas",
+                    "height": 330,
+                    "profile": "2b7c4080-0ddd-46c5-8f23-563fd3ba789d",
+                    "readOnly": false,
+                    "synchronizedInput": true,
+                    "type": "Terminal",
+                    "uuid": "b463e96e-df39-4c83-b41d-e5095e326c68",
+                    "width": 1266
+                },
+                "orientation": 1,
+                "position": 24,
+                "ratio": 0.499254843517138613,
+                "type": "Paned"
+            },
+            "orientation": 1,
+            "position": 50,
+            "ratio": 0.5,
+            "type": "Paned"
+        },
+        "orientation": 0,
+        "position": 50,
+        "ratio": 0.5,
+        "type": "Paned"
+    },
+    "height": 1354,
+    "name": "${title}",
+    "synchronizedInput": false,
+    "type": "Session",
+    "uuid": "4ea08589-78f9-4370-b3dc-1b15de046502",
+    "version": "1.0",
+    "width": 2544
+}
